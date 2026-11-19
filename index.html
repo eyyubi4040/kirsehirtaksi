@@ -26,6 +26,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
+  <!-- Dual-mode Link Resolver (Handles both Web Server & Local file:/// double-click) -->
+  <script>
+    if (window.location.protocol === 'file:') {
+      document.addEventListener('click', function(e) {
+        var t = e.target.closest('a[href]');
+        if (t) {
+          var h = t.getAttribute('href');
+          if (h && h.startsWith('/') && !h.startsWith('//')) {
+            e.preventDefault();
+            var c = h.slice(1);
+            var f = (!c || c === '') ? 'index.html' : (c.indexOf('.') !== -1 ? c : c + '.html');
+            window.location.href = f;
+          }
+        }
+      }, true);
+    }
+  </script>
+
   <!-- Schema.org JSON-LD (TaxiService) -->
   <script type="application/ld+json">
   {

@@ -1,7 +1,46 @@
 /**
  * KIRŞEHİR TAKSİ (kirsehirtaksi.net) - MAIN CONTROLLER
- * Reactive Fare Calculator • Live Reservation • WhatsApp Dispatcher
+ * Reactive Fare Calculator • Live Reservation • WhatsApp Dispatcher • Dual Protocol Router (HTTP & File)
  */
+
+// Immediate fix for local file:// protocol (double-clicking HTML files in Windows Explorer)
+(function initProtocolAutoFix() {
+  function fixLinks() {
+    if (window.location.protocol === 'file:') {
+      document.querySelectorAll('a[href]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('/') && !href.startsWith('//')) {
+          const cleanName = href.slice(1);
+          if (!cleanName || cleanName === '') {
+            a.setAttribute('href', 'index.html');
+          } else if (!cleanName.includes('.')) {
+            a.setAttribute('href', cleanName + '.html');
+          }
+        }
+      });
+    }
+  }
+
+  // Intercept click on file:/// protocol to guarantee zero ERR_FILE_NOT_FOUND
+  document.addEventListener('click', (e) => {
+    if (window.location.protocol !== 'file:') return;
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('/') && !href.startsWith('//')) {
+      e.preventDefault();
+      const cleanName = href.slice(1);
+      const targetFile = (!cleanName || cleanName === '') ? 'index.html' : (cleanName.includes('.') ? cleanName : cleanName + '.html');
+      window.location.href = targetFile;
+    }
+  }, true);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixLinks);
+  } else {
+    fixLinks();
+  }
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
@@ -103,7 +142,6 @@ function initFareCalculator() {
       return;
     }
 
-    // Try direct or reversed route key
     const directKey = `${pickup}-${dropoff}`;
     const reverseKey = `${dropoff}-${pickup}`;
     const route = TAXI_CONFIG.routes[directKey] || TAXI_CONFIG.routes[reverseKey];
@@ -117,7 +155,6 @@ function initFareCalculator() {
       km = route.km;
       mins = route.min;
     } else {
-      // Default estimation
       km = 8;
       mins = 12;
       estimatedPrice = Math.max(TAXI_CONFIG.minFare, Math.round(TAXI_CONFIG.openingFare + (km * TAXI_CONFIG.perKmRate)));
@@ -128,7 +165,6 @@ function initFareCalculator() {
       infoDisplay.textContent = `Yaklaşık ${km} km • ${mins} dakika varış süresi`;
     }
 
-    // Update Action Button Link
     if (actionBtn) {
       const pickupText = pickupSelect.options[pickupSelect.selectedIndex].text;
       const dropoffText = dropoffSelect.options[dropoffSelect.selectedIndex].text;
@@ -186,7 +222,6 @@ function initReservationForm() {
       }
     } catch (err) {
       console.warn('API fallback, sending direct to WhatsApp', err);
-      // Fallback directly to WhatsApp
       const msg = encodeURIComponent(`*KIRŞEHİR TAKSİ REZERVASYON TALEBİ*\n\n👤 *Yolcu:* ${data.name}\n📞 *Telefon:* ${data.phone}\n📍 *Kalkış:* ${data.pickup}\n🏁 *Varış:* ${data.dropoff}\n📅 *Tarih & Saat:* ${data.date} - ${data.time}\n🚖 *Araç:* ${data.vehicleType} (${data.passengers} Kişi)\n📝 *Not:* ${data.notes}`);
       window.open(`https://wa.me/${TAXI_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
       form.reset();
