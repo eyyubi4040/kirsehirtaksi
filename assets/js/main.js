@@ -190,6 +190,29 @@ function initFareCalculator() {
   calculate();
 }
 
+// Global helper for interactive quick route presets
+window.selectPreset = function(pickupVal, dropoffVal) {
+  const pickup = document.getElementById("calcPickup");
+  const dropoff = document.getElementById("calcDropoff");
+  if (pickup && dropoff) {
+    pickup.value = pickupVal;
+    dropoff.value = dropoffVal;
+    pickup.dispatchEvent(new Event("change"));
+    dropoff.dispatchEvent(new Event("change"));
+    
+    // Highlight the price card subtly
+    const card = document.querySelector(".fare-calc-card");
+    if (card) {
+      card.style.borderColor = "rgba(255, 184, 0, 0.7)";
+      card.style.boxShadow = "0 24px 60px rgba(0,0,0,0.9), 0 0 35px rgba(255, 184, 0, 0.25)";
+      setTimeout(() => {
+        card.style.borderColor = "";
+        card.style.boxShadow = "";
+      }, 700);
+    }
+  }
+};
+
 /* ==========================================================================
    3. ONLINE REZERVASYON FORMU (WHATSAPP ENTEGRASYONU)
    ========================================================================== */

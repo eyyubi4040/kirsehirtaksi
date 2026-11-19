@@ -194,34 +194,43 @@
 
   <!-- MAIN CONTENT -->
   <main>
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION - CINEMATIC VIP SHOWCASE -->
     <section class="hero-section">
-      <!-- Ambient Backdrops & Seamless Brand Logo Stage -->
-      <div class="hero-bg-stage" aria-hidden="true">
-        <div class="hero-ambient-glow"></div>
-        <div class="hero-bg-halo"></div>
-        <div class="hero-bg-logo"></div>
-        <div class="hero-bg-overlay"></div>
+      <!-- Ambient Atmospheric Lighting -->
+      <div class="hero-ambient-lights" aria-hidden="true">
+        <div class="hero-glow-orb hero-glow-1"></div>
+        <div class="hero-glow-orb hero-glow-2"></div>
+        <div class="hero-grid-pattern"></div>
       </div>
 
       <div class="site-container">
-        <div class="hero-layout">
-          <!-- Left/Main Column: Copy & Value Proposition -->
+        <div class="hero-grid">
+          <!-- Left Column: Copy & Value Proposition -->
           <div class="hero-content">
             <div class="hero-badge">
-              <i class="fa-solid fa-bolt"></i> 7/24 Kesintisiz Kırşehir Nöbetçi Taksi
+              <span class="pulse-dot"></span>
+              <span>7/24 Kesintisiz Kırşehir Nöbetçi Taksi</span>
             </div>
+
             <h1 class="hero-title">
               Kırşehir'in En Güvenilir & Hızlı <span>Taksi Hizmeti.</span>
             </h1>
+
+            <!-- MOBILE-ONLY SHOWCASE: Prominently visible right under the title on mobile! -->
+            <div class="hero-visual-showcase mobile-only-showcase" aria-label="Kırşehir Taksi Marka Görseli">
+              <div class="visual-ambient-halo"></div>
+              <img src="assets/images/logo.png" alt="Kırşehir Taksi" class="hero-prominent-logo" loading="eager">
+            </div>
+
             <p class="hero-desc">
-              Cacabey Meydanı, Otogar, Devlet Hastanesi, Üniversite Kampüsü ve Kırşehir'in tüm mahallelerinde tek dokunuşla kapınızdayız. Klimalı araçlar, deneyimli şoförler ve tüm kartlara uygun temassız POS cihazı konforu.
+              Cacabey Meydanı, Otogar, Devlet Hastanesi, Üniversite Kampüsü ve Kırşehir'in tüm mahallelerinde tek dokunuşla kapınızdayız. Klimalı VIP araçlar, deneyimli şoförler ve tüm kartlara uygun temassız POS cihazı konforu.
             </p>
 
             <div class="hero-cta-buttons">
               <a href="tel:+905550000000" class="btn-hero-call">
                 <i class="fa-solid fa-phone-volume"></i>
                 <span>Hemen Taksi Çağır</span>
+                <span class="btn-shimmer"></span>
               </a>
               <a href="https://wa.me/905550000000?text=Merhaba%2C%20bulundu%C4%9Fum%20konuma%20taksi%20%C3%A7a%C4%9F%C4%B1rmak%20istiyorum.%20Konumum%3A" target="_blank" rel="noopener noreferrer" class="btn-hero-whatsapp">
                 <i class="fa-brands fa-whatsapp"></i>
@@ -233,15 +242,40 @@
             <div class="hero-trust-bar">
               <div class="trust-item">
                 <div class="trust-icon"><i class="fa-solid fa-stopwatch"></i></div>
-                <div class="trust-text"><b>5 - 10 Dakika</b>Hızlı Adrese Varış</div>
+                <div class="trust-text"><b>5 - 10 Dakika</b><span>Hızlı Adrese Varış</span></div>
               </div>
               <div class="trust-item">
                 <div class="trust-icon"><i class="fa-solid fa-credit-card"></i></div>
-                <div class="trust-text"><b>Kredi Kartı / POS</b>Temassız Güvenli Ödeme</div>
+                <div class="trust-text"><b>Kredi Kartı / POS</b><span>Temassız Güvenli Ödeme</span></div>
               </div>
               <div class="trust-item">
                 <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="trust-text"><b>%100 Güvenilir</b>Yerel & Lisanslı Sürücüler</div>
+                <div class="trust-text"><b>%100 Güvenilir</b><span>Yerel & Lisanslı Sürücüler</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESKTOP-ONLY SHOWCASE: Prominent brand showcase in the right column with floating chips -->
+          <div class="hero-visual-showcase desktop-only-showcase" aria-label="Kırşehir Taksi Marka Vitrini">
+            <div class="visual-ambient-halo"></div>
+            <div class="visual-logo-container">
+              <img src="assets/images/logo.png" alt="Kırşehir Taksi" class="hero-prominent-logo" loading="eager">
+            </div>
+
+            <!-- Floating VIP Tech Chips -->
+            <div class="hero-float-chip chip-top" aria-hidden="true">
+              <div class="chip-icon"><i class="fa-solid fa-bolt"></i></div>
+              <div class="chip-info">
+                <b>5 - 10 Dk</b>
+                <span>Hızlı Varış</span>
+              </div>
+            </div>
+
+            <div class="hero-float-chip chip-bottom" aria-hidden="true">
+              <div class="chip-icon"><i class="fa-solid fa-credit-card"></i></div>
+              <div class="chip-info">
+                <b>Temassız POS</b>
+                <span>Tüm Kartlar Geçerli</span>
               </div>
             </div>
           </div>
@@ -260,7 +294,8 @@
 
         <div class="bento-grid">
           <!-- Featured Card 1: 7/24 Şehir İçi -->
-          <div class="bento-card featured">
+          <div class="bento-card featured" style="position:relative;">
+            <span class="badge-featured-gold"><i class="fa-solid fa-crown"></i> 7/24 En Çok Tercih Edilen</span>
             <div class="bento-icon"><i class="fa-solid fa-clock"></i></div>
             <h3 class="bento-card-title">7/24 Kesintisiz Şehir İçi Acil Taksi</h3>
             <p class="bento-card-desc">
@@ -280,7 +315,7 @@
           </div>
 
           <!-- Card 2: Havalimanı VIP Transfer -->
-          <div class="bento-card">
+          <div class="bento-card card-with-bg" style="background-image: linear-gradient(180deg, rgba(8,8,8,0.85) 0%, rgba(5,5,5,0.97) 100%), url('assets/images/vip-transfer.jpg');">
             <div class="bento-icon"><i class="fa-solid fa-plane-departure"></i></div>
             <h3 class="bento-card-title">Havalimanı VIP & Özel Transfer</h3>
             <p class="bento-card-desc">
@@ -300,7 +335,7 @@
           </div>
 
           <!-- Card 4: Hastane & Acil Sağlık -->
-          <div class="bento-card">
+          <div class="bento-card card-with-bg" style="background-image: linear-gradient(180deg, rgba(8,8,8,0.88) 0%, rgba(5,5,5,0.97) 100%), url('assets/images/taxi-interior.jpg');">
             <div class="bento-icon" style="color:var(--color-emergency); background:rgba(239,68,68,0.12); border-color:rgba(239,68,68,0.3);"><i class="fa-solid fa-hospital"></i></div>
             <h3 class="bento-card-title">Hastane & Acil Durum Önceliği</h3>
             <p class="bento-card-desc">
@@ -331,7 +366,18 @@
           <p class="section-desc">Kırşehir içi noktalar, ilçeler ve havalimanları için başlangıç ve varış yerinizi seçin, tahmini taksimetre tutarını ve varış süresini anında görün.</p>
         </div>
 
-        <div style="max-width: 620px; margin: 0 auto;">
+        <div style="max-width: 640px; margin: 0 auto;">
+          <!-- Quick Route Presets Bar -->
+          <div class="calc-presets-bar">
+            <span class="calc-presets-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Hızlı Güzergah:</span>
+            <div class="preset-chips">
+              <button type="button" class="preset-chip" onclick="selectPreset('merkez','otogar')">📍 Cacabey → Otogar (₺135)</button>
+              <button type="button" class="preset-chip" onclick="selectPreset('merkez','hastane')">📍 Merkez → Hastane (₺160)</button>
+              <button type="button" class="preset-chip" onclick="selectPreset('merkez','universite')">📍 Merkez → Kampüs (₺260)</button>
+              <button type="button" class="preset-chip" onclick="selectPreset('merkez','esenboga')">✈️ Esenboğa VIP (₺3.200)</button>
+            </div>
+          </div>
+
           <div class="fare-calc-card">
             <div class="calc-header">
               <div class="calc-title">
@@ -692,7 +738,70 @@
       </div>
     </section>
 
-    <!-- ONLINE RESERVATION SECTION -->
+    <!-- PASSENGER REVIEWS / SOCIAL PROOF SECTION -->
+    <section class="section-py" style="background: #030303; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-star" style="color:var(--color-primary)"></i> %99.8 Müşteri Memnuniyeti</span>
+          <h2 class="section-title">Kırşehir Bizi Tercih Ediyor <span>Yolcu Deneyimleri.</span></h2>
+          <p class="section-desc">Cacabey Meydanı'ndan üniversiteye, hastaneden havalimanına binlerce hemşehrimizin güvenle tercih ettiği Kırşehir Taksi memnuniyet yorumları.</p>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Review 1 -->
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-text">
+              "Gece 03:30'da otogara yetişmem gerekiyordu. Aradıktan 6 dakika sonra kapımdaydılar. Araç tertemiz, klimalı ve sıcacıktı. Kredi kartı ile temassız ödedim. Kırşehir'in en profesyonel taksisi."
+            </p>
+            <div class="review-author">
+              <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <div class="author-name">Ahmet Yılmaz</div>
+                <div class="author-role"><i class="fa-solid fa-circle-check" style="color:var(--color-whatsapp)"></i> Cacabey Meydanı / Yolcu</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card featured-review">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-text">
+              "Hastane nöbet çıkışlarında düzenli olarak çağırıyorum. Şoförler son derece saygılı, güven veren beyefendi insanlar. Gece geç saatlerde tek başıma binerken asla tedirgin olmuyorum. Teşekkürler."
+            </p>
+            <div class="review-author">
+              <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <div class="author-name">Dr. Selin Kaya</div>
+                <div class="author-role"><i class="fa-solid fa-circle-check" style="color:var(--color-whatsapp)"></i> Eğitim & Araştırma Hastanesi</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-text">
+              "Bağbaşı kampüsten Ankara Esenboğa Havalimanı'na transfer için rezervasyon yaptık. Uçuş saatimize göre tam dakikasında aldılar, sabit fiyat garantisiyle çok konforlu seyahat ettik."
+            </p>
+            <div class="review-author">
+              <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <div class="author-name">Mehmet Can</div>
+                <div class="author-role"><i class="fa-solid fa-circle-check" style="color:var(--color-whatsapp)"></i> Ahi Evran Ünv. / Öğrenci</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ONLINE RESERVATION SECTION (WHATSAPP INTEGRATED) -->
     <section class="section-py reservation-section" id="rezervasyon">
       <div class="site-container">
