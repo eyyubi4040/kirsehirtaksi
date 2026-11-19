@@ -335,6 +335,7 @@ button, input, select, textarea {
   justify-content: flex-end;
   position: relative;
   width: 100%;
+  margin-top: -36px;
 }
 
 .logo-ambient-halo {
@@ -1243,6 +1244,7 @@ button, input, select, textarea {
   }
   .hero-logo-showcase {
     justify-content: center;
+    margin-top: 0;
   }
   .hero-big-logo {
     margin: 0 auto;
