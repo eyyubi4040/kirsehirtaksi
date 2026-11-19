@@ -201,4 +201,18 @@ console.log(`\n========================================================`);
 console.log(`🚖 KIRŞEHİR TAKSİ (kirsehirtaksi.net) - BUN SERVER`);
 console.log(`🚀 Sunucu Aktif: http://${HOST}:${PORT}`);
 console.log(`📁 Çalışma Dizini: ${ROOT}`);
+
+// Dokploy Automatic Port Compatibility (Also listen on port 80 if PORT !== 80)
+if (PORT !== 80) {
+  try {
+    Bun.serve({
+      port: 80,
+      hostname: HOST,
+      fetch: handleRequest,
+    });
+    console.log(`🚀 Dokploy Otomatik Port 80 Dinleyicisi Aktif: http://${HOST}:80`);
+  } catch (err) {
+    // Port 80 might require root or be occupied locally
+  }
+}
 console.log(`========================================================\n`);

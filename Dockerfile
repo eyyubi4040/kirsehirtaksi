@@ -1,34 +1,26 @@
 # =========================================================================
 # KIRŞEHİR TAKSİ (kirsehirtaksi.net) - DOKPLOY DOCKERFILE
-# Ultra-lightweight Bun runtime container
+# Production-ready Bun runtime container
 # =========================================================================
 
-FROM oven/bun:alpine AS runner
+FROM oven/bun:1 AS runner
 
 WORKDIR /app
 
-# Copy project files
-COPY package.json ./
-COPY server ./server
-COPY data ./data
-COPY assets ./assets
-COPY index.html ./
-COPY fiyat-hesapla.html ./
-COPY duraklar.html ./
-COPY hizmetler.html ./
-COPY iletisim.html ./
-COPY 404.html ./
-COPY sitemap.xml ./
-COPY robots.txt ./
-COPY favicon.ico ./
+ENV NODE_ENV=production \
+    PORT=3000
 
-# Set environment
-ENV NODE_ENV=production
-ENV PORT=3000
+# Copy all project files
+COPY . .
+
+# Ensure data directory exists
+RUN mkdir -p /app/data
 
 EXPOSE 3000
+EXPOSE 80
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+# Native Bun Healthcheck (Zero external dependency, explicit IPv4 loopback)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD bun -e "fetch('http://127.0.0.1:' + (process.env.PORT || 3000) + '/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
 
-CMD ["bun", "run", "start"]
+CMD ["bun", "server/index.ts"]
