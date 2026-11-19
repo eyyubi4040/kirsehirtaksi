@@ -168,11 +168,13 @@ async function handleRequest(req: Request): Promise<Response> {
     const contentType = MIME_TYPES[ext] || "application/octet-stream";
     const file = Bun.file(filePath);
 
-    // Cache headers
-    const isAsset = relativePath.startsWith("assets/");
+    // Cache headers: HTML must be fresh; assets have moderate caching with revalidation
+    const isHtml = ext === ".html";
     const headers: Record<string, string> = {
       "Content-Type": contentType,
-      "Cache-Control": isAsset ? "public, max-age=2592000" : "public, max-age=3600"
+      "Cache-Control": isHtml 
+        ? "no-cache, no-store, must-revalidate" 
+        : "public, max-age=300, stale-while-revalidate=86400"
     };
 
     return new Response(file, { status: 200, headers });
