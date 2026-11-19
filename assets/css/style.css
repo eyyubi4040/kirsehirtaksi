@@ -13,18 +13,18 @@
   --color-primary-light: rgba(255, 184, 0, 0.12);
   --color-primary-glow: rgba(255, 184, 0, 0.35);
   --color-secondary: #F59E0B;
-  
+
   /* Pure Deep Black & Charcoal Surfaces */
   --color-bg-dark: #000000;
   --color-surface-dark: #070707;
   --color-surface-card: rgba(12, 12, 12, 0.95);
   --color-surface-card-hover: rgba(22, 22, 22, 0.98);
   --color-surface-light: #161616;
-  
+
   --color-text-main: #FFFFFF;
   --color-text-muted: #A3A3A3;
   --color-text-dim: #737373;
-  
+
   --color-border: rgba(255, 255, 255, 0.1);
   --color-border-glow: rgba(255, 184, 0, 0.35);
   --color-border-card: rgba(255, 255, 255, 0.08);
@@ -59,7 +59,9 @@
 }
 
 /* Base Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -88,7 +90,11 @@ body {
   min-height: 100vh;
 }
 
-img, svg, picture, video, canvas {
+img,
+svg,
+picture,
+video,
+canvas {
   display: block;
   max-width: 100%;
   height: auto;
@@ -100,7 +106,10 @@ a {
   transition: var(--transition-fast);
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
   font-size: inherit;
 }
@@ -164,9 +173,20 @@ button, input, select, textarea {
 }
 
 @keyframes pulse-ring {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
 
 .ticker-highlight {
@@ -186,6 +206,7 @@ button, input, select, textarea {
   align-items: center;
   gap: 6px;
 }
+
 .ticker-link:hover {
   color: var(--color-primary);
 }
@@ -243,7 +264,8 @@ button, input, select, textarea {
   padding: 6px 0;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--color-primary);
 }
 
@@ -298,10 +320,25 @@ button, input, select, textarea {
 }
 
 @keyframes shake-call {
-  0%, 100% { transform: rotate(0deg); }
-  10%, 30% { transform: rotate(-15deg); }
-  20%, 40% { transform: rotate(15deg); }
-  50% { transform: rotate(0deg); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  10%,
+  30% {
+    transform: rotate(-15deg);
+  }
+
+  20%,
+  40% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
 }
 
 /* WhatsApp Header Button */
@@ -407,6 +444,7 @@ button, input, select, textarea {
   0% {
     transform: translateY(-50%) scale(1);
   }
+
   100% {
     transform: translateY(-52%) scale(1.025);
   }
@@ -416,7 +454,7 @@ button, input, select, textarea {
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.94) 36%, rgba(0, 0, 0, 0.42) 66%, rgba(0, 0, 0, 0.12) 100%),
-              linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 20%, transparent 80%, #000000 100%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 20%, transparent 80%, #000000 100%);
   pointer-events: none;
 }
 
@@ -648,7 +686,8 @@ button, input, select, textarea {
   gap: 6px;
 }
 
-.form-select, .form-input {
+.form-select,
+.form-input {
   width: 100%;
   padding: 12px 16px;
   background: rgba(10, 10, 10, 0.9);
@@ -660,7 +699,8 @@ button, input, select, textarea {
   transition: var(--transition-fast);
 }
 
-.form-select:focus, .form-input:focus {
+.form-select:focus,
+.form-input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(255, 184, 0, 0.15);
 }
@@ -857,6 +897,7 @@ button, input, select, textarea {
   align-items: center;
   gap: 6px;
 }
+
 .bento-link:hover {
   gap: 10px;
 }
@@ -1032,6 +1073,7 @@ button, input, select, textarea {
   justify-content: center;
   gap: 6px;
 }
+
 .btn-station-call:hover {
   background: var(--color-primary);
   color: #0A0E17;
@@ -1277,30 +1319,38 @@ button, input, select, textarea {
     padding: 64px 0 72px;
     min-height: auto;
   }
+
   .hero-content {
     max-width: 580px;
   }
+
   .hero-bg-logo {
     width: 42vw;
     max-height: 420px;
     opacity: 0.65;
   }
+
   .hero-bg-halo {
     width: 400px;
     height: 400px;
   }
+
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .bento-card.featured {
     grid-column: span 2;
   }
+
   .pricing-grid {
     grid-template-columns: 1fr;
   }
+
   .stations-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1311,9 +1361,11 @@ button, input, select, textarea {
     padding: 44px 0 52px;
     min-height: auto;
   }
+
   .hero-content {
     max-width: 100%;
   }
+
   .hero-bg-logo {
     right: 50%;
     top: 50%;
@@ -1328,6 +1380,7 @@ button, input, select, textarea {
     filter: drop-shadow(0 0 20px rgba(255, 184, 0, 0.2));
     animation: none;
   }
+
   .hero-bg-halo {
     right: 50%;
     transform: translate(50%, -50%);
@@ -1335,9 +1388,11 @@ button, input, select, textarea {
     height: 220px;
     opacity: 0.35;
   }
+
   .hero-bg-overlay {
-    background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, #000000 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 50%, #000000 100%);
   }
+
   .hero-ambient-glow {
     width: 240px;
     height: 240px;
@@ -1345,26 +1400,32 @@ button, input, select, textarea {
     top: -40px;
     filter: blur(40px);
   }
+
   .hero-cta-buttons {
     flex-direction: column;
     width: 100%;
     gap: 12px;
   }
-  .btn-hero-call, .btn-hero-whatsapp {
+
+  .btn-hero-call,
+  .btn-hero-whatsapp {
     width: 100%;
     justify-content: center;
     padding: 14px 20px;
     font-size: 15px;
     text-align: center;
   }
+
   .hero-title {
     font-size: 32px;
     line-height: 1.18;
     word-break: break-word;
   }
+
   .hero-desc {
     font-size: 15px;
   }
+
   .hero-trust-bar {
     display: flex;
     flex-direction: column;
@@ -1379,9 +1440,11 @@ button, input, select, textarea {
     margin-top: 8px;
     border-top: 1px solid var(--color-border);
   }
+
   .hero-trust-bar::-webkit-scrollbar {
     display: none;
   }
+
   .trust-item {
     display: flex;
     align-items: center;
@@ -1394,6 +1457,7 @@ button, input, select, textarea {
     border-radius: 12px;
     padding: 10px 14px;
   }
+
   .trust-icon {
     width: 34px;
     height: 34px;
@@ -1406,6 +1470,7 @@ button, input, select, textarea {
     font-size: 14px;
     flex-shrink: 0;
   }
+
   .trust-text {
     font-size: 12px;
     color: var(--color-text-muted);
@@ -1414,6 +1479,7 @@ button, input, select, textarea {
     word-break: break-word;
     min-width: 0;
   }
+
   .trust-text b {
     color: #FFFFFF;
     font-size: 13.5px;
@@ -1422,36 +1488,48 @@ button, input, select, textarea {
     margin-bottom: 2px;
     white-space: normal;
   }
+
   .header-inner {
     height: 76px;
   }
+
   .brand-logo-img {
     height: 56px;
     max-width: 140px;
   }
-  .main-nav, .header-cta-group {
+
+  .main-nav,
+  .header-cta-group {
     display: none;
   }
+
   .mobile-toggle {
     display: block;
   }
+
   .bento-grid {
     grid-template-columns: 1fr;
   }
+
   .bento-card.featured {
     grid-column: span 1;
   }
+
   .stations-grid {
     grid-template-columns: 1fr;
   }
+
   .footer-grid {
     grid-template-columns: 1fr;
   }
+
   .mobile-action-dock {
     display: block;
   }
+
   body {
-    padding-bottom: 74px; /* Space for dock */
+    padding-bottom: 74px;
+    /* Space for dock */
   }
 }
 
@@ -1460,53 +1538,67 @@ button, input, select, textarea {
     padding-left: 14px;
     padding-right: 14px;
   }
+
   .hero-title {
     font-size: 27px;
   }
+
   .hero-bg-logo {
     max-width: min(250px, 78vw);
     opacity: 0.15;
   }
+
   .hero-bg-halo {
     width: 150px;
     height: 150px;
     filter: blur(25px);
   }
+
   .hero-section {
     padding: 36px 0 44px;
   }
+
   .hero-trust-bar {
     gap: 8px;
     padding-top: 14px;
   }
+
   .trust-item {
     padding: 8px 12px;
     gap: 10px;
     border-radius: 10px;
   }
+
   .trust-icon {
     width: 30px;
     height: 30px;
     font-size: 13px;
   }
+
   .trust-text {
     font-size: 11.5px;
   }
+
   .trust-text b {
     font-size: 13px;
   }
+
   .brand-logo-img {
     height: 50px;
   }
+
   .header-inner {
     height: 68px;
   }
+
   .top-ticker {
     font-size: 11.5px;
   }
+
   .ticker-actions {
     display: none;
   }
+
   .top-ticker-inner {
     justify-content: center;
     text-align: center;
@@ -1556,6 +1648,8 @@ button, input, select, textarea {
   font-weight: 600;
   color: var(--color-text-muted);
 }
-.drawer-link:hover, .drawer-link.active {
+
+.drawer-link:hover,
+.drawer-link.active {
   color: var(--color-primary);
 }

@@ -66,9 +66,9 @@ const TAXI_CONFIG = {
   openingFare: 35.00,
   perKmRate: 25.00,
   minFare: 100.00,
-  phone: "05412134040",
-  phoneFormatted: "0 541 213 40 40",
-  whatsappNumber: "905412134040",
+  phone: "05550000000",
+  phoneFormatted: "0 555 000 00 00",
+  whatsappNumber: "905550000000",
   
   // Known routes & distances from Kırşehir Center
   routes: {

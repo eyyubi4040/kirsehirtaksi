@@ -2,9 +2,9 @@
   "companyName": "Kırşehir Taksi",
   "domain": "kirsehirtaksi.net",
   "tagline": "Kırşehir 7/24 Acil Taksi, Taksimetre Hesaplama & Havalimanı VIP Transfer",
-  "phone": "0 541 213 40 40",
-  "phoneRaw": "+905412134040",
-  "whatsapp": "905412134040",
+  "phone": "0 555 000 00 00",
+  "phoneRaw": "+905550000000",
+  "whatsapp": "905550000000",
   "address": "Cacabey Meydanı, Terme Cad. No:12, Merkez / KIRŞEHİR",
   "workingHours": "7/24 Kesintisiz Hizmet",
   "email": "iletisim@kirsehirtaksi.net",
@@ -45,11 +45,11 @@
     { "name": "Yeni Sanayi Sitesi", "duration": "7 dk" }
   ],
   "stations": [
-    { "id": "cacabey", "name": "Cacabey Meydan Taksi Durağı", "location": "Cacabey Meydanı, Merkez", "phone": "0 541 213 40 40", "active": true, "status": "Nöbetçi Araçlar Hazır" },
-    { "id": "otogar", "name": "Kırşehir Şehirlerarası Otogar Taksi", "location": "Şehirlerarası Otobüs Terminali", "phone": "0 541 213 40 40", "active": true, "status": "7/24 Peronda Aktif" },
-    { "id": "hastane", "name": "Devlet & Araştırma Hastanesi Taksi", "location": "Kırşehir Eğitim Araştırma Hastanesi Karşısı", "phone": "0 541 213 40 40", "active": true, "status": "Acil Kapısında Nöbetçi" },
-    { "id": "universite", "name": "Ahi Evran Üniversitesi Kampüs Taksi", "location": "Bağbaşı Yerleşkesi Girişi", "phone": "0 541 213 40 40", "active": true, "status": "Öğrenci & Personel Aktif" },
-    { "id": "medrese", "name": "Medrese Taksi Durağı", "location": "Medrese Mahallesi, Atatürk Cad.", "phone": "0 541 213 40 40", "active": true, "status": "7/24 Kesintisiz" },
-    { "id": "cicek", "name": "Çiçek Taksi Durağı", "location": "Yenice Mahallesi, Terme Yolu", "phone": "0 541 213 40 40", "active": true, "status": "7/24 Kesintisiz" }
+    { "id": "cacabey", "name": "Cacabey Meydan Taksi Durağı", "location": "Cacabey Meydanı, Merkez", "phone": "0 555 000 00 00", "active": true, "status": "Nöbetçi Araçlar Hazır" },
+    { "id": "otogar", "name": "Kırşehir Şehirlerarası Otogar Taksi", "location": "Şehirlerarası Otobüs Terminali", "phone": "0 555 000 00 00", "active": true, "status": "7/24 Peronda Aktif" },
+    { "id": "hastane", "name": "Devlet & Araştırma Hastanesi Taksi", "location": "Kırşehir Eğitim Araştırma Hastanesi Karşısı", "phone": "0 555 000 00 00", "active": true, "status": "Acil Kapısında Nöbetçi" },
+    { "id": "universite", "name": "Ahi Evran Üniversitesi Kampüs Taksi", "location": "Bağbaşı Yerleşkesi Girişi", "phone": "0 555 000 00 00", "active": true, "status": "Öğrenci & Personel Aktif" },
+    { "id": "medrese", "name": "Medrese Taksi Durağı", "location": "Medrese Mahallesi, Atatürk Cad.", "phone": "0 555 000 00 00", "active": true, "status": "7/24 Kesintisiz" },
+    { "id": "cicek", "name": "Çiçek Taksi Durağı", "location": "Yenice Mahallesi, Terme Yolu", "phone": "0 555 000 00 00", "active": true, "status": "7/24 Kesintisiz" }
   ]
 }
