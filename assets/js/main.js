@@ -5,6 +5,18 @@
 
 // Immediate fix for local file:// protocol (double-clicking HTML files in Windows Explorer)
 (function initProtocolAutoFix() {
+  // If running on Web Server (HTTP/HTTPS), enforce zero .html Clean URLs
+  if (window.location.protocol.startsWith('http')) {
+    const p = window.location.pathname;
+    if (p.endsWith('.html')) {
+      const clean = p === '/index.html' ? '/' : p.replace(/\.html$/, '');
+      window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+    } else if (p.length > 1 && p.endsWith('/')) {
+      window.history.replaceState(null, '', p.slice(0, -1) + window.location.search + window.location.hash);
+    }
+    return;
+  }
+
   function fixLinks() {
     if (window.location.protocol === 'file:') {
       document.querySelectorAll('a[href]').forEach(a => {

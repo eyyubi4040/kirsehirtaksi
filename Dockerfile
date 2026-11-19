@@ -17,7 +17,6 @@ COPY fiyat-hesapla.html ./
 COPY duraklar.html ./
 COPY hizmetler.html ./
 COPY iletisim.html ./
-COPY admin.html ./
 COPY 404.html ./
 COPY sitemap.xml ./
 COPY robots.txt ./

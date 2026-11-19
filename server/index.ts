@@ -132,7 +132,25 @@ async function handleRequest(req: Request): Promise<Response> {
     return Response.json({ error: "Endpoint not found" }, { status: 404 });
   }
 
-  // 3. Clean URLs & Static File Serving
+  // 3. Clean URLs Enforcement & 301 Canonical Redirects
+  // Case A: Redirect /index.html -> /
+  if (pathname === "/index.html" || pathname === "/index") {
+    return Response.redirect(url.origin + "/", 301);
+  }
+
+  // Case B: Redirect any *.html to clean URL (e.g. /duraklar.html -> /duraklar)
+  if (pathname.endsWith(".html")) {
+    const cleanPath = pathname.slice(0, -5);
+    return Response.redirect(url.origin + (cleanPath || "/"), 301);
+  }
+
+  // Case C: Remove trailing slashes on clean routes (e.g. /duraklar/ -> /duraklar)
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    const trimmedPath = pathname.slice(0, -1);
+    return Response.redirect(url.origin + trimmedPath, 301);
+  }
+
+  // 4. Resolve Clean URL to Static File
   let relativePath = pathname === "/" ? "index.html" : pathname.slice(1);
 
   // If path doesn't have an extension, try appending .html (Clean URLs)
