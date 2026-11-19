@@ -7,26 +7,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Brand Palette - Taxi Gold & Obsidian Carbon */
+  /* Brand Palette - Taxi Gold & Deep Luxury Obsidian Black */
   --color-primary: #FFB800;
   --color-primary-hover: #FFA000;
   --color-primary-light: rgba(255, 184, 0, 0.12);
   --color-primary-glow: rgba(255, 184, 0, 0.35);
   --color-secondary: #F59E0B;
   
-  --color-bg-dark: #0A0E17;
-  --color-surface-dark: #111827;
-  --color-surface-card: rgba(17, 24, 39, 0.85);
-  --color-surface-card-hover: rgba(30, 41, 59, 0.95);
-  --color-surface-light: #1E293B;
+  /* Pure Deep Black & Charcoal Surfaces */
+  --color-bg-dark: #000000;
+  --color-surface-dark: #070707;
+  --color-surface-card: rgba(12, 12, 12, 0.95);
+  --color-surface-card-hover: rgba(22, 22, 22, 0.98);
+  --color-surface-light: #161616;
   
   --color-text-main: #FFFFFF;
-  --color-text-muted: #94A3B8;
-  --color-text-dim: #64748B;
+  --color-text-muted: #A3A3A3;
+  --color-text-dim: #737373;
   
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-glow: rgba(255, 184, 0, 0.3);
-  --color-border-card: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-glow: rgba(255, 184, 0, 0.35);
+  --color-border-card: rgba(255, 255, 255, 0.08);
 
   --color-whatsapp: #25D366;
   --color-whatsapp-hover: #20BD5A;
@@ -76,7 +77,8 @@ html {
 body {
   line-height: 1.6;
   overflow-x: hidden;
-  background: radial-gradient(circle at 50% 0%, #162033 0%, var(--color-bg-dark) 55%);
+  background-color: #000000;
+  background-image: radial-gradient(circle at 50% -10%, #1c1809 0%, #000000 65%);
   min-height: 100vh;
 }
 
@@ -119,7 +121,7 @@ button, input, select, textarea {
    TOP TICKER / STATUS BAR
    ========================================================================== */
 .top-ticker {
-  background: rgba(10, 14, 23, 0.95);
+  background: rgba(0, 0, 0, 0.98);
   border-bottom: 1px solid var(--color-border);
   padding: 8px 0;
   font-size: 13px;
@@ -188,7 +190,7 @@ button, input, select, textarea {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 14, 23, 0.85);
+  background: rgba(0, 0, 0, 0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-border);
   transition: var(--transition-smooth);
@@ -322,6 +324,81 @@ button, input, select, textarea {
   font-size: 24px;
   cursor: pointer;
   padding: 8px;
+}
+
+/* ==========================================================================
+   HERO BIG LOGO SHOWCASE
+   ========================================================================== */
+.hero-logo-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.hero-logo-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 620px;
+  background: radial-gradient(circle at center, rgba(255, 184, 0, 0.08) 0%, rgba(10, 10, 10, 0.95) 75%);
+  border: 1px solid rgba(255, 184, 0, 0.25);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 184, 0, 0.18);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.hero-logo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FFB800, #F59E0B, #FFC107);
+}
+
+.logo-ambient-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 184, 0, 0.22) 0%, rgba(255, 184, 0, 0) 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-big-logo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 184, 0, 0.35));
+  animation: float-logo 4.5s ease-in-out infinite;
+  transition: transform var(--transition-smooth);
+}
+
+.hero-big-logo:hover {
+  transform: scale(1.03) translateY(-4px);
+}
+
+@keyframes float-logo {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* ==========================================================================
@@ -562,7 +639,7 @@ button, input, select, textarea {
 .form-select, .form-input {
   width: 100%;
   padding: 12px 16px;
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(10, 10, 10, 0.9);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: #FFFFFF;
@@ -577,7 +654,7 @@ button, input, select, textarea {
 }
 
 .calc-result-box {
-  background: rgba(10, 14, 23, 0.7);
+  background: rgba(5, 5, 5, 0.9);
   border: 1px dashed rgba(255, 184, 0, 0.3);
   border-radius: var(--radius-md);
   padding: 16px;
@@ -726,7 +803,7 @@ button, input, select, textarea {
 
 .bento-card.featured {
   grid-column: span 2;
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(22, 22, 22, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
   border-color: rgba(255, 184, 0, 0.3);
 }
 
@@ -820,14 +897,14 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(10, 10, 10, 0.85);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
 }
 
 .route-item:hover {
-  background: rgba(30, 41, 59, 0.7);
+  background: rgba(22, 22, 22, 0.95);
   border-color: rgba(255, 184, 0, 0.3);
 }
 
@@ -952,7 +1029,7 @@ button, input, select, textarea {
    ONLINE REZERVASYON FORMU SECTION
    ========================================================================== */
 .reservation-section {
-  background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.6) 0%, var(--color-bg-dark) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(20, 18, 10, 0.6) 0%, #000000 100%);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -1048,7 +1125,7 @@ button, input, select, textarea {
    FOOTER
    ========================================================================== */
 .site-footer {
-  background: #070A10;
+  background: #000000;
   border-top: 1px solid var(--color-border);
   padding: 64px 0 32px;
   position: relative;
@@ -1141,11 +1218,11 @@ button, input, select, textarea {
   left: 0;
   right: 0;
   z-index: 999;
-  background: rgba(10, 14, 23, 0.95);
+  background: rgba(0, 0, 0, 0.98);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--color-border);
   padding: 10px 16px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.7);
 }
 
 .dock-inner {
@@ -1240,7 +1317,8 @@ button, input, select, textarea {
   width: 80%;
   max-width: 320px;
   height: 100vh;
-  background: #0F172A;
+  background: #080808;
+  border-left: 1px solid var(--color-border);
   z-index: 1000;
   box-shadow: var(--shadow-lg);
   padding: 32px 24px;

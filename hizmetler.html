@@ -10,11 +10,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
+  <!-- Dual-mode Link Resolver (Guarantees zero ERR_FILE_NOT_FOUND on local double-click & preserves Clean URLs on server) -->
   <script>
-    if (window.location.protocol === 'file:') {
-      document.addEventListener('click', function(e) {
-        var t = e.target.closest('a[href]');
-        if (t) {
+    (function() {
+      if (window.location.protocol === 'file:') {
+        function rewriteAllLinks() {
+          var links = document.querySelectorAll('a[href]');
+          for (var i = 0; i < links.length; i++) {
+            var h = links[i].getAttribute('href');
+            if (h && h.startsWith('/') && !h.startsWith('//')) {
+              var c = h.slice(1);
+              var target = (!c || c === '') ? 'index.html' : (c.indexOf('.') !== -1 ? c : c + '.html');
+              links[i].setAttribute('href', target);
+            }
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', rewriteAllLinks);
+        } else {
+          rewriteAllLinks();
+        }
+        if (window.MutationObserver) {
+          new MutationObserver(rewriteAllLinks).observe(document.documentElement, { childList: true, subtree: true });
+        }
+        function handleNav(e) {
+          var t = e.target.closest('a[href]');
+          if (!t) return;
           var h = t.getAttribute('href');
           if (h && h.startsWith('/') && !h.startsWith('//')) {
             e.preventDefault();
@@ -23,8 +44,10 @@
             window.location.href = f;
           }
         }
-      }, true);
-    }
+        document.addEventListener('click', handleNav, true);
+        document.addEventListener('auxclick', handleNav, true);
+      }
+    })();
   </script>
 </head>
 <body>

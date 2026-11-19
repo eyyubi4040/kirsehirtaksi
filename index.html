@@ -26,12 +26,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- Dual-mode Link Resolver (Handles both Web Server & Local file:/// double-click) -->
+  <!-- Dual-mode Link Resolver (Guarantees zero ERR_FILE_NOT_FOUND on local double-click & preserves Clean URLs on server) -->
   <script>
-    if (window.location.protocol === 'file:') {
-      document.addEventListener('click', function(e) {
-        var t = e.target.closest('a[href]');
-        if (t) {
+    (function() {
+      if (window.location.protocol === 'file:') {
+        function rewriteAllLinks() {
+          var links = document.querySelectorAll('a[href]');
+          for (var i = 0; i < links.length; i++) {
+            var h = links[i].getAttribute('href');
+            if (h && h.startsWith('/') && !h.startsWith('//')) {
+              var c = h.slice(1);
+              var target = (!c || c === '') ? 'index.html' : (c.indexOf('.') !== -1 ? c : c + '.html');
+              links[i].setAttribute('href', target);
+            }
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', rewriteAllLinks);
+        } else {
+          rewriteAllLinks();
+        }
+        if (window.MutationObserver) {
+          new MutationObserver(rewriteAllLinks).observe(document.documentElement, { childList: true, subtree: true });
+        }
+        function handleNav(e) {
+          var t = e.target.closest('a[href]');
+          if (!t) return;
           var h = t.getAttribute('href');
           if (h && h.startsWith('/') && !h.startsWith('//')) {
             e.preventDefault();
@@ -40,8 +60,10 @@
             window.location.href = f;
           }
         }
-      }, true);
-    }
+        document.addEventListener('click', handleNav, true);
+        document.addEventListener('auxclick', handleNav, true);
+      }
+    })();
   </script>
 
   <!-- Schema.org JSON-LD (TaxiService) -->
@@ -218,92 +240,11 @@
             </div>
           </div>
 
-          <!-- Right Column: Interactive Taksimetre Widget -->
-          <div class="hero-calc-wrapper">
-            <div class="fare-calc-card">
-              <div class="calc-header">
-                <div class="calc-title">
-                  <i class="fa-solid fa-calculator"></i>
-                  <span>Canlı Taksimetre Hesapla</span>
-                </div>
-                <span class="calc-badge"><i class="fa-solid fa-circle-dot"></i> Güncel Tarife</span>
-              </div>
-
-              <div class="calc-form">
-                <div class="form-group">
-                  <label class="form-label" for="calcPickup">
-                    <i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> Nereden Alınacaksınız?
-                  </label>
-                  <select class="form-select" id="calcPickup">
-                    <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
-                    <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
-                    <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
-                    <option value="universite">Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
-                    <option value="kervansaray">Kervansaray Mahallesi</option>
-                    <option value="yenice">Yenice Mahallesi / Terme</option>
-                    <option value="asikpasa">Aşıkpaşa Mahallesi</option>
-                    <option value="kindam">Kındam Mahallesi</option>
-                    <option value="sanayi">Yeni Sanayi Sitesi</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="calcDropoff">
-                    <i class="fa-solid fa-flag-checkered" style="color:var(--color-whatsapp)"></i> Nereye Gideceksiniz?
-                  </label>
-                  <select class="form-select" id="calcDropoff">
-                    <!-- City locations -->
-                    <optgroup label="Şehir İçi Noktalar">
-                      <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
-                      <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
-                      <option value="universite" selected>Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
-                      <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
-                      <option value="kervansaray">Kervansaray Mahallesi</option>
-                      <option value="yenice">Yenice Mahallesi</option>
-                      <option value="asikpasa">Aşıkpaşa Mahallesi</option>
-                      <option value="kindam">Kındam Mahallesi</option>
-                      <option value="sanayi">Yeni Sanayi Sitesi</option>
-                    </optgroup>
-                    <!-- Districts -->
-                    <optgroup label="Kırşehir İlçeleri">
-                      <option value="mucur">Mucur (24 km)</option>
-                      <option value="kaman">Kaman (54 km)</option>
-                      <option value="boztepe">Boztepe (18 km)</option>
-                      <option value="akpinar">Akpınar (42 km)</option>
-                      <option value="cicekdagi">Çiçekdağı (68 km)</option>
-                      <option value="akcakent">Akçakent (72 km)</option>
-                    </optgroup>
-                    <!-- Airports & Intercity -->
-                    <optgroup label="Havalimanı & Şehirlerarası">
-                      <option value="esenboga">Ankara Esenboğa Havalimanı (ESB)</option>
-                      <option value="ankara-asti">Ankara Şehir Merkezi / AŞTİ</option>
-                      <option value="kayseri-havalimani">Kayseri Erkilet Havalimanı (ASR)</option>
-                      <option value="nevsehir-havalimani">Nevşehir Kapadokya Havalimanı (NAV)</option>
-                      <option value="kozakli">Kozaklı Termal Tesisleri</option>
-                    </optgroup>
-                  </select>
-                </div>
-
-                <!-- Result Box -->
-                <div class="calc-result-box">
-                  <div class="result-info">
-                    <span class="result-label">Tahmini Tutar</span>
-                    <span class="result-sub" id="calcInfoDisplay">Hesaplanıyor...</span>
-                  </div>
-                  <div class="result-price-wrap">
-                    <span class="result-price" id="calcPriceDisplay">0</span>
-                    <span class="result-unit"> ₺</span>
-                  </div>
-                </div>
-
-                <a href="#" id="btnCalcAction" target="_blank" class="btn-calc-action">
-                  <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i>
-                  <span>Taksiyi Bu Rotaya Çağır</span>
-                </a>
-                <p style="font-size: 12px; color: var(--color-text-dim); text-align: center; margin-top: 4px;">
-                  * Trafik yoğunluğuna göre küçük farklılıklar gösterebilir. Sabit fiyat garantisi mevcuttur.
-                </p>
-              </div>
+          <!-- Right Column: Big Brand Logo Showcase -->
+          <div class="hero-logo-showcase">
+            <div class="hero-logo-card">
+              <div class="logo-ambient-halo"></div>
+              <img src="assets/images/logo.png" alt="Kırşehir Taksi" class="hero-big-logo">
             </div>
           </div>
         </div>
@@ -311,7 +252,7 @@
     </section>
 
     <!-- SERVICES BENTO GRID SECTION -->
-    <section class="section-py" style="background: rgba(15, 23, 42, 0.4);">
+    <section class="section-py" style="background: #050505;">
       <div class="site-container">
         <div class="section-header">
           <span class="section-tag"><i class="fa-solid fa-taxi"></i> Kapsamlı Hizmet Ağı</span>
@@ -378,6 +319,105 @@
               Şehir içinde veya çevre ilçelere acil ulaştırılması gereken evrak, yedek parça ve özel paketlerinizi adresinizden teslim alıp alıcısına güvenle teslim ediyoruz.
             </p>
             <a href="https://wa.me/905412134040" target="_blank" class="bento-link">Kurye Çağır <i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEDICATED LIVE TAXIMETER SECTION -->
+    <section class="section-py" id="taksimetre" style="background: #000000; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-calculator"></i> Canlı Taksimetre</span>
+          <h2 class="section-title">Güzergah & <span>Mesafe Hesapla.</span></h2>
+          <p class="section-desc">Kırşehir içi noktalar, ilçeler ve havalimanları için başlangıç ve varış yerinizi seçin, tahmini taksimetre tutarını ve varış süresini anında görün.</p>
+        </div>
+
+        <div style="max-width: 620px; margin: 0 auto;">
+          <div class="fare-calc-card">
+            <div class="calc-header">
+              <div class="calc-title">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Canlı Taksimetre Hesapla</span>
+              </div>
+              <span class="calc-badge"><i class="fa-solid fa-circle-dot"></i> Güncel 2026 Tarife</span>
+            </div>
+
+            <div class="calc-form">
+              <div class="form-group">
+                <label class="form-label" for="calcPickup">
+                  <i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> Nereden Alınacaksınız?
+                </label>
+                <select class="form-select" id="calcPickup">
+                  <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
+                  <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
+                  <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
+                  <option value="universite">Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
+                  <option value="kervansaray">Kervansaray Mahallesi</option>
+                  <option value="yenice">Yenice Mahallesi / Terme</option>
+                  <option value="asikpasa">Aşıkpaşa Mahallesi</option>
+                  <option value="kindam">Kındam Mahallesi</option>
+                  <option value="sanayi">Yeni Sanayi Sitesi</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="calcDropoff">
+                  <i class="fa-solid fa-flag-checkered" style="color:var(--color-whatsapp)"></i> Nereye Gideceksiniz?
+                </label>
+                <select class="form-select" id="calcDropoff">
+                  <!-- City locations -->
+                  <optgroup label="Şehir İçi Noktalar">
+                    <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
+                    <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
+                    <option value="universite" selected>Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
+                    <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
+                    <option value="kervansaray">Kervansaray Mahallesi</option>
+                    <option value="yenice">Yenice Mahallesi</option>
+                    <option value="asikpasa">Aşıkpaşa Mahallesi</option>
+                    <option value="kindam">Kındam Mahallesi</option>
+                    <option value="sanayi">Yeni Sanayi Sitesi</option>
+                  </optgroup>
+                  <!-- Districts -->
+                  <optgroup label="Kırşehir İlçeleri">
+                    <option value="mucur">Mucur (24 km)</option>
+                    <option value="kaman">Kaman (54 km)</option>
+                    <option value="boztepe">Boztepe (18 km)</option>
+                    <option value="akpinar">Akpınar (42 km)</option>
+                    <option value="cicekdagi">Çiçekdağı (68 km)</option>
+                    <option value="akcakent">Akçakent (72 km)</option>
+                  </optgroup>
+                  <!-- Airports & Intercity -->
+                  <optgroup label="Havalimanı & Şehirlerarası">
+                    <option value="esenboga">Ankara Esenboğa Havalimanı (ESB)</option>
+                    <option value="ankara-asti">Ankara Şehir Merkezi / AŞTİ</option>
+                    <option value="kayseri-havalimani">Kayseri Erkilet Havalimanı (ASR)</option>
+                    <option value="nevsehir-havalimani">Nevşehir Kapadokya Havalimanı (NAV)</option>
+                    <option value="kozakli">Kozaklı Termal Tesisleri</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <!-- Result Box -->
+              <div class="calc-result-box">
+                <div class="result-info">
+                  <span class="result-label">Tahmini Tutar</span>
+                  <span class="result-sub" id="calcInfoDisplay">Hesaplanıyor...</span>
+                </div>
+                <div class="result-price-wrap">
+                  <span class="result-price" id="calcPriceDisplay">0</span>
+                  <span class="result-unit"> ₺</span>
+                </div>
+              </div>
+
+              <a href="#" id="btnCalcAction" target="_blank" class="btn-calc-action">
+                <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i>
+                <span>Taksiyi Bu Rotaya Çağır</span>
+              </a>
+              <p style="font-size: 12px; color: var(--color-text-dim); text-align: center; margin-top: 4px;">
+                * Trafik yoğunluğuna göre küçük farklılıklar gösterebilir. Sabit fiyat garantisi mevcuttur.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -519,7 +559,7 @@
     </section>
 
     <!-- STATIONS & HUBS (DURAKLAR) SECTION -->
-    <section class="section-py" style="background: rgba(15, 23, 42, 0.4);">
+    <section class="section-py" style="background: #050505;">
       <div class="site-container">
         <div class="section-header">
           <span class="section-tag"><i class="fa-solid fa-network-wired"></i> Şehir İçi Ağı</span>
