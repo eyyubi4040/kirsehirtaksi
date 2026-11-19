@@ -327,51 +327,25 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   HERO BIG LOGO SHOWCASE
+   HERO BIG BRAND LOGO (BOXLESS & RIGHT-ALIGNED)
    ========================================================================== */
 .hero-logo-showcase {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   position: relative;
   width: 100%;
-}
-
-.hero-logo-card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 32px;
-  width: 100%;
-  max-width: 620px;
-  background: radial-gradient(circle at center, rgba(255, 184, 0, 0.08) 0%, rgba(10, 10, 10, 0.95) 75%);
-  border: 1px solid rgba(255, 184, 0, 0.25);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 184, 0, 0.18);
-  backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-
-.hero-logo-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #FFB800, #F59E0B, #FFC107);
 }
 
 .logo-ambient-halo {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, rgba(255, 184, 0, 0.22) 0%, rgba(255, 184, 0, 0) 70%);
-  filter: blur(55px);
+  right: 15%;
+  transform: translate(15%, -50%);
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255, 184, 0, 0.22) 0%, rgba(255, 184, 0, 0.06) 45%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(65px);
   pointer-events: none;
   z-index: 1;
 }
@@ -380,16 +354,18 @@ button, input, select, textarea {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 560px;
+  max-width: 680px;
   height: auto;
+  margin-left: auto;
   object-fit: contain;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(255, 184, 0, 0.35));
-  animation: float-logo 4.5s ease-in-out infinite;
-  transition: transform var(--transition-smooth);
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(255, 184, 0, 0.38));
+  animation: float-logo 4.8s ease-in-out infinite;
+  transition: transform var(--transition-smooth), filter var(--transition-smooth);
 }
 
 .hero-big-logo:hover {
-  transform: scale(1.03) translateY(-4px);
+  transform: scale(1.03) translateY(-6px);
+  filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 1)) drop-shadow(0 0 45px rgba(255, 184, 0, 0.55));
 }
 
 @keyframes float-logo {
@@ -397,7 +373,7 @@ button, input, select, textarea {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
   }
 }
 
@@ -424,7 +400,7 @@ button, input, select, textarea {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
   position: relative;
@@ -1264,6 +1240,19 @@ button, input, select, textarea {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .hero-logo-showcase {
+    justify-content: center;
+  }
+  .hero-big-logo {
+    margin: 0 auto;
+    max-width: 480px;
+  }
+  .logo-ambient-halo {
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 380px;
+    height: 380px;
   }
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
