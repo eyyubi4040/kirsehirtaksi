@@ -431,118 +431,141 @@ textarea {
 }
 
 /* ==========================================================================
-   HERO SECTION - CINEMATIC CENTERED VIP SHOWCASE (Clean, High-Impact)
+   HERO SECTION - 2-COLUMN LUXURY SHOWCASE (Text on Left, Big Logo on Right)
    ========================================================================== */
-.hero-content.hero-centered {
+.hero-two-col {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 860px;
+  justify-content: space-between;
+  gap: 48px;
   width: 100%;
-  gap: 24px;
   position: relative;
   z-index: 3;
 }
 
-.hero-content.hero-centered .hero-badge {
-  margin: 0 auto;
+/* SOL KOLON: Metinler, Başlık, Butonlar, Güven Çubuğu */
+.hero-left-col {
+  flex: 1 1 56%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  text-align: left;
+  align-items: flex-start;
+  min-width: 0;
+  position: relative;
+  z-index: 3;
 }
 
-.hero-content.hero-centered .hero-title {
-  font-size: 54px;
-  line-height: 1.14;
+.hero-left-col .hero-title {
+  font-size: 46px;
+  line-height: 1.15;
   letter-spacing: -0.025em;
   font-weight: 800;
-  max-width: 840px;
-  margin: 0 auto;
   color: #FFFFFF;
+  margin: 0;
 }
 
-.hero-content.hero-centered .hero-title span {
+.hero-left-col .hero-title span {
   color: var(--color-primary);
   background: linear-gradient(135deg, #FFB800 0%, #FFD54F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.hero-content.hero-centered .hero-desc {
-  font-size: 18px;
-  line-height: 1.65;
+.hero-left-col .hero-desc {
+  font-size: 16.5px;
+  line-height: 1.6;
   color: #C0C0C0;
-  max-width: 700px;
-  margin: 0 auto;
+  margin: 0;
 }
 
-.hero-content.hero-centered .hero-cta-buttons {
+.hero-left-col .hero-cta-buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 16px;
   margin-top: 6px;
   flex-wrap: wrap;
 }
 
-.hero-content.hero-centered .hero-trust-bar {
+.hero-left-col .hero-trust-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
-  padding-top: 24px;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
-  max-width: 820px;
 }
 
-.hero-content.hero-centered .trust-item {
+.hero-left-col .trust-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
+  padding: 10px 16px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  text-align: left;
+  border-radius: 12px;
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.hero-content.hero-centered .trust-item:hover {
+.hero-left-col .trust-item:hover {
   transform: translateY(-2px);
   border-color: rgba(255, 184, 0, 0.3);
   background: rgba(255, 184, 0, 0.03);
 }
-  transition: transform var(--transition-smooth), filter var(--transition-smooth);
+
+/* MOBİL İÇİN LOGO (Masaüstünde ASLA görünmez) */
+.hero-mobile-logo-wrap {
+  display: none !important;
 }
 
-.chip-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 184, 0, 0.16);
-  color: var(--color-primary);
-  display: flex;
+/* SAĞ KOLON: BÜYÜK LOGO (Masaüstünde sağa yerleşir) */
+.hero-right-col {
+  flex: 1 1 44%;
+  max-width: 520px;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
 }
 
-.chip-info {
-  display: flex;
-  flex-direction: column;
+.hero-logo-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, rgba(255, 184, 0, 0.28) 0%, rgba(255, 184, 0, 0.08) 45%, transparent 72%);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 1;
 }
 
-.chip-info b {
-  font-size: 13px;
-  color: #FFFFFF;
-  line-height: 1.2;
+.hero-big-logo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  opacity: 1 !important;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 35px rgba(255, 184, 0, 0.35));
+  animation: float-hero-logo 6s ease-in-out infinite alternate;
+  transition: transform var(--transition-smooth);
 }
 
-.chip-info span {
-  font-size: 11px;
-  color: var(--color-text-muted);
+@keyframes float-hero-logo {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-10px) scale(1.02);
+  }
 }
 
 .hero-badge {
@@ -1570,16 +1593,77 @@ textarea {
    ========================================================================== */
 @media (max-width: 1024px) {
   .hero-section {
-    padding: 60px 0 68px;
+    padding: 56px 0 64px;
     min-height: auto;
   }
 
-  .hero-content.hero-centered .hero-title {
-    font-size: 44px;
+  .hero-two-col {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
   }
 
-  .hero-content.hero-centered .hero-desc {
-    font-size: 16.5px;
+  .hero-left-col {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-left-col .hero-title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .hero-left-col .hero-desc {
+    font-size: 16px;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .hero-left-col .hero-cta-buttons {
+    justify-content: center;
+  }
+
+  .hero-left-col .hero-trust-bar {
+    justify-content: center;
+  }
+
+  /* Masaüstü sağ kolondaki logo mobilde gizlenir */
+  .hero-right-col {
+    display: none !important;
+  }
+
+  /* Mobilde logo başlığın hemen altında görünür */
+  .hero-mobile-logo-wrap {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: min(340px, 88vw);
+    margin: 8px auto 14px;
+    position: relative;
+  }
+
+  .hero-mobile-logo {
+    width: 100%;
+    max-width: min(320px, 86vw);
+    height: auto;
+    display: block;
+    opacity: 1 !important;
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 28px rgba(255, 184, 0, 0.45));
+    animation: float-hero-logo 5s ease-in-out infinite alternate;
+  }
+
+  .hero-mobile-halo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255, 184, 0, 0.35) 0%, rgba(255, 184, 0, 0.1) 45%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
   }
 
   .reviews-grid {
@@ -1609,25 +1693,23 @@ textarea {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 38px 0 46px;
+    padding: 36px 0 44px;
     min-height: auto;
   }
 
-  .hero-content.hero-centered {
-    gap: 18px;
-  }
-
-  .hero-content.hero-centered .hero-title {
+  .hero-left-col .hero-title {
     font-size: 32px;
     line-height: 1.18;
+    text-align: center;
   }
 
-  .hero-content.hero-centered .hero-desc {
+  .hero-left-col .hero-desc {
     font-size: 15px;
     line-height: 1.55;
+    text-align: center;
   }
 
-  .hero-content.hero-centered .hero-cta-buttons {
+  .hero-left-col .hero-cta-buttons {
     flex-direction: column;
     width: 100%;
     gap: 12px;
@@ -1642,7 +1724,7 @@ textarea {
     text-align: center;
   }
 
-  .hero-content.hero-centered .hero-trust-bar {
+  .hero-left-col .hero-trust-bar {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
@@ -1656,11 +1738,11 @@ textarea {
     border-top: 1px solid var(--color-border);
   }
 
-  .hero-content.hero-centered .hero-trust-bar::-webkit-scrollbar {
+  .hero-left-col .hero-trust-bar::-webkit-scrollbar {
     display: none;
   }
 
-  .hero-content.hero-centered .trust-item {
+  .hero-left-col .trust-item {
     display: flex;
     align-items: center;
     gap: 12px;
