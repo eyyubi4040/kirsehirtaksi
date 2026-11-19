@@ -373,24 +373,24 @@ button, input, select, textarea {
 .hero-bg-halo {
   position: absolute;
   top: 50%;
-  right: 6%;
+  right: 7%;
   transform: translateY(-50%);
-  width: 660px;
-  height: 660px;
-  background: radial-gradient(circle, rgba(255, 184, 0, 0.24) 0%, rgba(255, 184, 0, 0.07) 45%, rgba(0, 0, 0, 0) 72%);
-  filter: blur(80px);
+  width: 540px;
+  height: 540px;
+  background: radial-gradient(circle, rgba(255, 184, 0, 0.22) 0%, rgba(255, 184, 0, 0.06) 45%, rgba(0, 0, 0, 0) 72%);
+  filter: blur(75px);
   pointer-events: none;
 }
 
 .hero-bg-logo {
   position: absolute;
   top: 50%;
-  right: 2%;
+  right: 4%;
   transform: translateY(-50%);
-  width: 820px;
-  max-width: 55vw;
-  height: 85%;
-  max-height: 590px;
+  width: 670px;
+  max-width: 46vw;
+  height: 75%;
+  max-height: 480px;
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
   background-position: center right;
@@ -398,7 +398,7 @@ button, input, select, textarea {
   opacity: 0.88;
   mask-image: radial-gradient(ellipse 72% 68% at 60% 50%, #000000 35%, transparent 78%);
   -webkit-mask-image: radial-gradient(ellipse 72% 68% at 60% 50%, #000000 35%, transparent 78%);
-  filter: drop-shadow(0 0 50px rgba(255, 184, 0, 0.35));
+  filter: drop-shadow(0 0 45px rgba(255, 184, 0, 0.32));
   animation: subtle-logo-float 7s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -1277,12 +1277,13 @@ button, input, select, textarea {
     max-width: 580px;
   }
   .hero-bg-logo {
-    width: 50vw;
+    width: 42vw;
+    max-height: 420px;
     opacity: 0.65;
   }
   .hero-bg-halo {
-    width: 480px;
-    height: 480px;
+    width: 400px;
+    height: 400px;
   }
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1314,8 +1315,8 @@ button, input, select, textarea {
     top: 50%;
     transform: translate(50%, -50%);
     width: 90vw;
-    max-width: 380px;
-    height: 60%;
+    max-width: 310px;
+    height: 55%;
     background-position: center;
     opacity: 0.18;
     mask-image: radial-gradient(ellipse 75% 70% at center, #000000 30%, transparent 80%);
@@ -1326,8 +1327,8 @@ button, input, select, textarea {
   .hero-bg-halo {
     right: 50%;
     transform: translate(50%, -50%);
-    width: 260px;
-    height: 260px;
+    width: 220px;
+    height: 220px;
     opacity: 0.35;
   }
   .hero-bg-overlay {
@@ -1413,12 +1414,12 @@ button, input, select, textarea {
     font-size: 27px;
   }
   .hero-bg-logo {
-    max-width: min(300px, 86vw);
+    max-width: min(250px, 78vw);
     opacity: 0.15;
   }
   .hero-bg-halo {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     filter: blur(25px);
   }
   .hero-section {
