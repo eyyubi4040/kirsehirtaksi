@@ -1,0 +1,32 @@
+[
+  {
+    "id": "REZ-1001",
+    "createdAt": "2026-11-19T14:30:00Z",
+    "name": "Ahmet Yılmaz",
+    "phone": "0542 555 12 34",
+    "pickup": "Kırşehir Otogarı",
+    "dropoff": "Ahi Evran Üniversitesi Bağbaşı Kampüsü",
+    "date": "2026-11-20",
+    "time": "09:30",
+    "vehicleType": "Standart Sarı Taksi",
+    "passengers": "2",
+    "estimatedFare": 185,
+    "status": "Onaylandı",
+    "notes": "Otobüs 09:20'de varacak, peron çıkışında bekleniyor."
+  },
+  {
+    "id": "REZ-1002",
+    "createdAt": "2026-11-19T16:15:00Z",
+    "name": "Merve Demir",
+    "phone": "0533 444 88 99",
+    "pickup": "Cacabey Meydanı",
+    "dropoff": "Ankara Esenboğa Havalimanı (ESB)",
+    "date": "2026-11-21",
+    "time": "05:00",
+    "vehicleType": "VIP Transfer (Vito / Geniş)",
+    "passengers": "4",
+    "estimatedFare": 3200,
+    "status": "Beklemede",
+    "notes": "Uçak saati 09:15, 3 adet büyük valiz."
+  }
+]

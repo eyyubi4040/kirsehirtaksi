@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kırşehir Taksi Fiyat Hesapla | Canlı Taksimetre & İlçe/Havalimanı Tarifesi</title>
+  <meta name="description" content="Kırşehir canlı taksimetre ve mesafe hesaplayıcı. Kırşehir merkez, Kaman, Mucur, Çiçekdağı ve Ankara Esenboğa, Kayseri havalimanı sabit transfer fiyatları.">
+  <link rel="canonical" href="https://kirsehirtaksi.net/fiyat-hesapla">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- TOP STATUS BAR -->
+  <div class="top-ticker">
+    <div class="site-container">
+      <div class="top-ticker-inner">
+        <div class="ticker-badge">
+          <span class="pulse-dot"></span>
+          <span>7/24 Şeffaf & Sabit Taksi Tarifesi</span>
+          <span style="opacity: 0.5;">•</span>
+          <span class="ticker-highlight">Sürpriz Yok, Gizli Masraf Yok</span>
+        </div>
+        <div class="ticker-actions">
+          <span class="ticker-link"><i class="fa-solid fa-credit-card" style="color:var(--color-primary)"></i> Temassız POS Geçerlidir</span>
+          <a href="tel:+905412134040" class="ticker-link" style="color:#FFF; font-weight:700;"><i class="fa-solid fa-phone" style="color:var(--color-primary)"></i> 0 541 213 40 40</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="site-container">
+      <div class="header-inner">
+        <a href="/" class="brand-logo-link">
+          <img src="assets/images/logo.png" alt="Kırşehir Taksi" class="brand-logo-img">
+        </a>
+        <nav class="main-nav">
+          <a href="/" class="nav-link">Ana Sayfa</a>
+          <a href="/fiyat-hesapla" class="nav-link active">Fiyat Hesapla</a>
+          <a href="/duraklar" class="nav-link">Duraklarımız</a>
+          <a href="/hizmetler" class="nav-link">Hizmetlerimiz</a>
+          <a href="/iletisim" class="nav-link">İletişim</a>
+        </nav>
+        <div class="header-cta-group">
+          <a href="https://wa.me/905412134040" target="_blank" class="btn-whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="tel:+905412134040" class="btn-emergency">
+            <i class="fa-solid fa-phone-volume"></i>
+            <span>0 541 213 40 40</span>
+          </a>
+        </div>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Menü"><i class="fa-solid fa-bars-staggered"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerCloseBtn" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+    <div style="text-align: center; margin-bottom: 10px;">
+      <img src="assets/images/logo.png" alt="Kırşehir Taksi" style="height: 52px; margin: 0 auto;">
+    </div>
+    <div class="drawer-links">
+      <a href="/" class="drawer-link">Ana Sayfa</a>
+      <a href="/fiyat-hesapla" class="drawer-link active">Fiyat & Mesafe Hesapla</a>
+      <a href="/duraklar" class="drawer-link">Duraklarımız & Mahalleler</a>
+      <a href="/hizmetler" class="drawer-link">Hizmetlerimiz</a>
+      <a href="/iletisim" class="drawer-link">İletişim</a>
+    </div>
+    <div style="margin-top:auto; display:flex; flex-direction:column; gap:10px;">
+      <a href="tel:+905412134040" class="btn-emergency" style="justify-content:center;"><i class="fa-solid fa-phone"></i> Hemen Ara</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <section class="section-py" style="padding-top: 50px;">
+      <div class="site-container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-calculator"></i> Mesafe & Ücret Simülatörü</span>
+          <h1 class="section-title">Canlı Taksimetre & <span>Fiyat Hesaplama.</span></h1>
+          <p class="section-desc">Kırşehir içi ve şehirlerarası yolculuklarınızda başlangıç ve varış noktanızı seçin; tahmini mesafe, süre ve net tutarı anında görün.</p>
+        </div>
+
+        <div style="max-width: 680px; margin: 0 auto 60px;">
+          <div class="fare-calc-card">
+            <div class="calc-header">
+              <div class="calc-title"><i class="fa-solid fa-route"></i><span>Rotanızı Belirleyin</span></div>
+              <span class="calc-badge">2026 Güncel</span>
+            </div>
+            <div class="calc-form">
+              <div class="form-group">
+                <label class="form-label" for="calcPickup"><i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> Kalkış Yeri</label>
+                <select class="form-select" id="calcPickup">
+                  <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
+                  <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
+                  <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
+                  <option value="universite">Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
+                  <option value="kervansaray">Kervansaray Mahallesi</option>
+                  <option value="yenice">Yenice Mahallesi / Terme</option>
+                  <option value="asikpasa">Aşıkpaşa Mahallesi</option>
+                  <option value="kindam">Kındam Mahallesi</option>
+                  <option value="sanayi">Yeni Sanayi Sitesi</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="calcDropoff"><i class="fa-solid fa-flag-checkered" style="color:var(--color-whatsapp)"></i> Varış Yeri</label>
+                <select class="form-select" id="calcDropoff">
+                  <optgroup label="Şehir İçi Noktalar">
+                    <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
+                    <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
+                    <option value="universite" selected>Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
+                    <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
+                    <option value="kervansaray">Kervansaray Mahallesi</option>
+                    <option value="yenice">Yenice Mahallesi</option>
+                    <option value="asikpasa">Aşıkpaşa Mahallesi</option>
+                    <option value="kindam">Kındam Mahallesi</option>
+                    <option value="sanayi">Yeni Sanayi Sitesi</option>
+                  </optgroup>
+                  <optgroup label="Kırşehir İlçeleri">
+                    <option value="mucur">Mucur (24 km)</option>
+                    <option value="kaman">Kaman (54 km)</option>
+                    <option value="boztepe">Boztepe (18 km)</option>
+                    <option value="akpinar">Akpınar (42 km)</option>
+                    <option value="cicekdagi">Çiçekdağı (68 km)</option>
+                    <option value="akcakent">Akçakent (72 km)</option>
+                  </optgroup>
+                  <optgroup label="Havalimanları & Çevre İller">
+                    <option value="esenboga">Ankara Esenboğa Havalimanı (ESB)</option>
+                    <option value="ankara-asti">Ankara Şehir Merkezi / AŞTİ</option>
+                    <option value="kayseri-havalimani">Kayseri Erkilet Havalimanı (ASR)</option>
+                    <option value="nevsehir-havalimani">Nevşehir Kapadokya Havalimanı (NAV)</option>
+                    <option value="kozakli">Kozaklı Termal Tesisleri</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="calc-result-box">
+                <div class="result-info">
+                  <span class="result-label">Tahmini Tutar</span>
+                  <span class="result-sub" id="calcInfoDisplay">Hesaplanıyor...</span>
+                </div>
+                <div class="result-price-wrap">
+                  <span class="result-price" id="calcPriceDisplay">0</span>
+                  <span class="result-unit"> ₺</span>
+                </div>
+              </div>
+
+              <a href="#" id="btnCalcAction" target="_blank" class="btn-calc-action">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Taksiyi Bu Rotaya Çağır</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tariff Details Cards -->
+        <div class="bento-grid" style="margin-bottom: 60px;">
+          <div class="bento-card">
+            <div class="bento-icon"><i class="fa-solid fa-flag"></i></div>
+            <h3 class="bento-card-title">Taksimetre Açılış Ücreti</h3>
+            <p class="bento-card-desc">Tüm araçlarımızda taksimetre açılışı standart ve resmi tarife olan <b>35,00 ₺</b> üzerinden başlatılır.</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-icon"><i class="fa-solid fa-road"></i></div>
+            <h3 class="bento-card-title">Kilometre Başı Ücret</h3>
+            <p class="bento-card-desc">Şehir içi her 1 kilometre için <b>25,00 ₺</b> yansıtılır. Trafik bekleme süreleri resmi taksimetre adımıyla hesaplanır.</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-icon"><i class="fa-solid fa-arrow-down-short-wide"></i></div>
+            <h3 class="bento-card-title">Minimum İndi-Bindi</h3>
+            <p class="bento-card-desc">Çok kısa mesafeli transferlerde araç minimum hizmet bedeli <b>100,00 ₺</b> olarak uygulanmaktadır.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-bottom">
+        <div>© 2026 <b>kirsehirtaksi.net</b> - Tüm Hakları Saklıdır.</div>
+        <div class="footer-designer">Tasarım: <a href="https://kirsehirwebdesign.com" target="_blank">Kırşehir Web Design / EyCodeX</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
