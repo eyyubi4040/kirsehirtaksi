@@ -692,13 +692,14 @@
     </section>
 
     <!-- ONLINE RESERVATION SECTION -->
+    <!-- ONLINE RESERVATION SECTION (WHATSAPP INTEGRATED) -->
     <section class="section-py reservation-section" id="rezervasyon">
       <div class="site-container">
         <div class="reservation-box">
           <div style="text-align: center; margin-bottom: 32px;">
-            <span class="section-tag"><i class="fa-solid fa-calendar-check"></i> Önceden Planlayın</span>
-            <h2 class="section-title">Online Taksi & Transfer <span>Rezervasyonu</span></h2>
-            <p class="section-desc">Sabah erken uçuşlar, otogar aktarmaları veya özel seyahatleriniz için aracınızı önceden ayırtın, sürpriz yaşamayın.</p>
+            <span class="section-tag" style="background:rgba(37,211,102,0.12); color:var(--color-whatsapp); border-color:rgba(37,211,102,0.3);"><i class="fa-brands fa-whatsapp"></i> Doğrudan WhatsApp Rezervasyonu</span>
+            <h2 class="section-title">Online Taksi & VIP Transfer <span>Rezervasyonu</span></h2>
+            <p class="section-desc">Havalimanı, otogar, hastane veya şehirlerarası seyahatleriniz için formu doldurun; detaylar tek dokunuşla doğrudan 7/24 WhatsApp nöbetçi hattımıza iletilsin.</p>
           </div>
 
           <form id="reservationForm">
@@ -738,7 +739,7 @@
                 <select id="resVehicle" name="vehicleType" class="form-select">
                   <option value="Standart Sarı Taksi">Standart Sarı Taksi (1 - 4 Kişi)</option>
                   <option value="Geniş Bagajlı Aile Aracı">Geniş Bagajlı Aile Aracı (Geniş Bagaj)</option>
-                  <option value="VIP Transfer (Vito / Geniş)">VIP Minibüs / Transfer (Mercedes Vito vb.)</option>
+                  <option value="VIP Minibüs Transfer">VIP Minibüs Transfer (Mercedes Vito / Geniş)</option>
                 </select>
               </div>
 
@@ -755,16 +756,16 @@
             </div>
 
             <div class="form-group" style="margin-top: 18px;">
-              <label class="form-label" for="resNotes"><i class="fa-solid fa-message"></i> Özel Notlar (Opsiyonel)</label>
+              <label class="form-label" for="resNotes"><i class="fa-solid fa-message"></i> Özel Notlar / İstekler (Opsiyonel)</label>
               <textarea id="resNotes" name="notes" class="form-input" rows="3" placeholder="Örn: Uçuş kodumuz TK2144, yanımızda 3 büyük valiz olacak."></textarea>
             </div>
 
-            <button type="submit" class="btn-emergency" style="width:100%; justify-content:center; padding:16px; font-size:16px; margin-top:24px;">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>Rezervasyonu Tamamla & Onayla</span>
+            <button type="submit" class="btn-hero-whatsapp" style="width:100%; justify-content:center; padding:16px; font-size:16px; margin-top:24px; border-radius:var(--radius-full); box-shadow:0 10px 28px rgba(37,211,102,0.35); cursor:pointer;">
+              <i class="fa-brands fa-whatsapp" style="font-size:22px;"></i>
+              <span>WhatsApp ile Rezervasyonu İlet</span>
             </button>
             <p style="text-align:center; font-size:12.5px; color:var(--color-text-dim); margin-top:12px;">
-              🔒 Bilgileriniz yalnızca şoför ataması ve yolculuk teyidi için kullanılır.
+              <i class="fa-solid fa-bolt" style="color:var(--color-primary)"></i> Butona dokunduğunuzda hazır rezervasyon mesajınız doğrudan WhatsApp hattımıza aktarılır.
             </p>
           </form>
         </div>

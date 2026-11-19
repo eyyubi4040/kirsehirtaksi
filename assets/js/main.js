@@ -179,81 +179,92 @@ function initFareCalculator() {
 }
 
 /* ==========================================================================
-   3. ONLINE REZERVASYON FORMU
+   3. ONLINE REZERVASYON FORMU (WHATSAPP ENTEGRASYONU)
    ========================================================================== */
 function initReservationForm() {
   const form = document.getElementById('reservationForm');
   if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Rezervasyon Alınıyor...';
+    const name = form.elements['name']?.value?.trim() || '';
+    const phone = form.elements['phone']?.value?.trim() || '';
+    const pickup = form.elements['pickup']?.value?.trim() || '';
+    const dropoff = form.elements['dropoff']?.value?.trim() || '';
+    const date = form.elements['date']?.value || '';
+    const time = form.elements['time']?.value || '';
+    const vehicleType = form.elements['vehicleType']?.value || 'Standart Sarı Taksi';
+    const passengers = form.elements['passengers']?.value || '1';
+    const notes = form.elements['notes']?.value?.trim() || 'Yok';
 
-    const data = {
-      name: form.elements['name']?.value || '',
-      phone: form.elements['phone']?.value || '',
-      pickup: form.elements['pickup']?.value || '',
-      dropoff: form.elements['dropoff']?.value || '',
-      date: form.elements['date']?.value || '',
-      time: form.elements['time']?.value || '',
-      vehicleType: form.elements['vehicleType']?.value || 'Standart Sarı Taksi',
-      passengers: form.elements['passengers']?.value || '1',
-      notes: form.elements['notes']?.value || ''
-    };
-
-    try {
-      const res = await fetch('/api/rezervasyon', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      const json = await res.json();
-
-      if (res.ok && json.success) {
-        showSuccessModal(data, json.id);
-        form.reset();
-      } else {
-        alert('Rezervasyon kaydedilirken bir hata oluştu: ' + (json.message || 'Lütfen tekrar deneyiniz.'));
-      }
-    } catch (err) {
-      console.warn('API fallback, sending direct to WhatsApp', err);
-      const msg = encodeURIComponent(`*KIRŞEHİR TAKSİ REZERVASYON TALEBİ*\n\n👤 *Yolcu:* ${data.name}\n📞 *Telefon:* ${data.phone}\n📍 *Kalkış:* ${data.pickup}\n🏁 *Varış:* ${data.dropoff}\n📅 *Tarih & Saat:* ${data.date} - ${data.time}\n🚖 *Araç:* ${data.vehicleType} (${data.passengers} Kişi)\n📝 *Not:* ${data.notes}`);
-      window.open(`https://wa.me/${TAXI_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
-      form.reset();
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+    let formattedDate = date;
+    if (date && date.includes('-')) {
+      const parts = date.split('-');
+      formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
     }
+
+    const message = 
+`🚖 *KIRŞEHİR TAKSİ - ONLİNE REZERVASYON TALEBİ*
+
+👤 *Yolcu:* ${name}
+📞 *Telefon:* ${phone}
+📍 *Alınış Adresi:* ${pickup}
+🏁 *Varış Yeri:* ${dropoff}
+📅 *Tarih:* ${formattedDate}
+⏰ *Saat:* ${time}
+🚕 *Araç Tercihi:* ${vehicleType} (${passengers} Yolcu)
+📝 *Özel Not:* ${notes}
+
+✅ Lütfen rezervasyonumu onaylayıp araç durumunu teyit eder misiniz?`;
+
+    const encodedMsg = encodeURIComponent(message);
+    const waUrl = `https://wa.me/${TAXI_CONFIG.whatsappNumber}?text=${encodedMsg}`;
+
+    // Open WhatsApp
+    window.open(waUrl, '_blank');
+
+    // Show luxury on-screen confirmation modal
+    showSuccessModal({
+      name,
+      phone,
+      pickup,
+      dropoff,
+      date: formattedDate,
+      time,
+      vehicleType,
+      waUrl
+    });
+
+    form.reset();
   });
 }
 
-function showSuccessModal(data, refId) {
+function showSuccessModal(data) {
+  const existing = document.getElementById('bookingModal');
+  if (existing) existing.remove();
+
   const modalHtml = `
-    <div id="bookingModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
-      <div style="background:#111827;border:1px solid rgba(255,184,0,0.3);border-radius:24px;padding:36px;max-width:500px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.6);">
-        <div style="width:64px;height:64px;background:rgba(37,211,102,0.15);color:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 16px;">
-          <i class="fa-solid fa-check"></i>
+    <div id="bookingModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(16px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;">
+      <div style="background:#0c0c0c;border:1px solid rgba(37,211,102,0.35);border-radius:24px;padding:36px;max-width:480px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.95), 0 0 40px rgba(37,211,102,0.15);">
+        <div style="width:68px;height:68px;background:rgba(37,211,102,0.14);color:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 18px;border:1px solid rgba(37,211,102,0.3);">
+          <i class="fa-brands fa-whatsapp"></i>
         </div>
-        <h3 style="font-size:22px;color:#fff;margin-bottom:8px;font-family:'Plus Jakarta Sans',sans-serif;">Rezervasyonunuz Alındı!</h3>
-        <p style="color:#94A3B8;font-size:14px;margin-bottom:20px;">
-          Talebiniz başarıyla sisteme kaydedildi. Referans Kodunuz: <b style="color:#FFB800;">${refId || '#KIR-TAKSI'}</b>
+        <h3 style="font-size:22px;color:#fff;margin-bottom:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;">Rezervasyon WhatsApp'a İletildi!</h3>
+        <p style="color:#A3A3A3;font-size:14px;margin-bottom:20px;line-height:1.5;">
+          Sayın <b style="color:#fff;">${data.name}</b>, rezervasyon detaylarınız WhatsApp hattımıza aktarıldı. Şoförümüz birkaç dakika içinde sizinle iletişime geçecektir.
         </p>
-        <div style="background:#1E293B;padding:16px;border-radius:12px;margin-bottom:24px;text-align:left;font-size:13.5px;color:#E2E8F0;line-height:1.6;">
-          <div><b>Kalkış:</b> ${data.pickup}</div>
-          <div><b>Varış:</b> ${data.dropoff}</div>
-          <div><b>Zaman:</b> ${data.date} - ${data.time}</div>
-          <div><b>Araç:</b> ${data.vehicleType}</div>
+        <div style="background:#141414;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:14px;margin-bottom:24px;text-align:left;font-size:13.5px;color:#D4D4D4;line-height:1.7;">
+          <div><b style="color:#fff;">📍 Alınış:</b> ${data.pickup}</div>
+          <div><b style="color:#fff;">🏁 Varış:</b> ${data.dropoff}</div>
+          <div><b style="color:#fff;">⏰ Zaman:</b> ${data.date} - ${data.time}</div>
+          <div><b style="color:#fff;">🚖 Araç:</b> ${data.vehicleType}</div>
         </div>
         <div style="display:flex;gap:12px;">
-          <a href="https://wa.me/${TAXI_CONFIG.whatsappNumber}?text=${encodeURIComponent(`Rezervasyon Kodum: ${refId}. Onaylamak için yazıyorum.`)}" target="_blank" style="flex:1;background:#25D366;color:#fff;font-weight:700;padding:12px;border-radius:999px;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp'ta Onayla
+          <a href="${data.waUrl}" target="_blank" style="flex:1;background:#25D366;color:#fff;font-weight:700;padding:14px;border-radius:999px;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 24px rgba(37,211,102,0.35);">
+            <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> WhatsApp'ta Gör
           </a>
-          <button onclick="document.getElementById('bookingModal').remove()" style="padding:12px 20px;background:#334155;color:#fff;border:none;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;">
+          <button onclick="document.getElementById('bookingModal').remove()" style="padding:14px 22px;background:#222222;color:#fff;border:1px solid rgba(255,255,255,0.1);border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;">
             Kapat
           </button>
         </div>
