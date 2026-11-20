@@ -1029,6 +1029,17 @@ textarea {
   overflow: hidden;
 }
 
+.bento-card.featured.card-with-bg {
+  background-position: right center !important;
+}
+
+@media (max-width: 768px) {
+  .bento-card.featured.card-with-bg {
+    background-image: linear-gradient(180deg, rgba(8, 8, 8, 0.94) 0%, rgba(8, 8, 8, 0.86) 55%, rgba(8, 8, 8, 0.65) 100%), url('../images/back.png') !important;
+    background-position: center right !important;
+  }
+}
+
 .badge-featured-gold {
   position: absolute;
   top: 16px;
