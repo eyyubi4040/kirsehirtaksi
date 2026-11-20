@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kırşehir Taksi Fiyat Hesapla | Canlı Taksimetre & İlçe/Havalimanı Tarifesi</title>
-  <meta name="description" content="Kırşehir canlı taksimetre ve mesafe hesaplayıcı. Kırşehir merkez, Kaman, Mucur, Çiçekdağı ve Ankara Esenboğa, Kayseri havalimanı sabit transfer fiyatları.">
+  <meta name="description"
+    content="Kırşehir canlı taksimetre ve mesafe hesaplayıcı. Kırşehir merkez, Kaman, Mucur, Çiçekdağı ve Ankara Esenboğa, Kayseri havalimanı sabit transfer fiyatları.">
   <link rel="canonical" href="https://kirsehirtaksi.net/fiyat-hesapla">
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -12,7 +14,7 @@
 
   <!-- Dual-mode Link Resolver (Guarantees zero ERR_FILE_NOT_FOUND on local double-click & preserves Clean URLs on server) -->
   <script>
-    (function() {
+    (function () {
       if (window.location.protocol === 'file:') {
         function rewriteAllLinks() {
           var links = document.querySelectorAll('a[href]');
@@ -50,6 +52,7 @@
     })();
   </script>
 </head>
+
 <body>
 
   <!-- TOP STATUS BAR -->
@@ -63,8 +66,10 @@
           <span class="ticker-highlight">Sürpriz Yok, Gizli Masraf Yok</span>
         </div>
         <div class="ticker-actions">
-          <span class="ticker-link"><i class="fa-solid fa-credit-card" style="color:var(--color-primary)"></i> Temassız POS Geçerlidir</span>
-          <a href="tel:+905550000000" class="ticker-link" style="color:#FFF; font-weight:700;"><i class="fa-solid fa-phone" style="color:var(--color-primary)"></i> 0 555 000 00 00</a>
+          <span class="ticker-link"><i class="fa-solid fa-credit-card" style="color:var(--color-primary)"></i> Temassız
+            POS Geçerlidir</span>
+          <a href="tel:+905550000000" class="ticker-link" style="color:#FFF; font-weight:700;"><i
+              class="fa-solid fa-phone" style="color:var(--color-primary)"></i> 0 555 000 00 00</a>
         </div>
       </div>
     </div>
@@ -85,13 +90,15 @@
           <a href="/iletisim" class="nav-link">İletişim</a>
         </nav>
         <div class="header-cta-group">
-          <a href="https://wa.me/905550000000" target="_blank" class="btn-whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://wa.me/905550000000" target="_blank" class="btn-whatsapp-icon"><i
+              class="fa-brands fa-whatsapp"></i></a>
           <a href="tel:+905550000000" class="btn-emergency">
             <i class="fa-solid fa-phone-volume"></i>
             <span>0 555 000 00 00</span>
           </a>
         </div>
-        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Menü"><i class="fa-solid fa-bars-staggered"></i></button>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Menü"><i
+            class="fa-solid fa-bars-staggered"></i></button>
       </div>
     </div>
   </header>
@@ -110,7 +117,8 @@
       <a href="/iletisim" class="drawer-link">İletişim</a>
     </div>
     <div style="margin-top:auto; display:flex; flex-direction:column; gap:10px;">
-      <a href="tel:+905550000000" class="btn-emergency" style="justify-content:center;"><i class="fa-solid fa-phone"></i> Hemen Ara</a>
+      <a href="tel:+905550000000" class="btn-emergency" style="justify-content:center;"><i
+          class="fa-solid fa-phone"></i> Hemen Ara</a>
     </div>
   </div>
 
@@ -121,7 +129,8 @@
         <div class="section-header">
           <span class="section-tag"><i class="fa-solid fa-calculator"></i> Mesafe & Ücret Simülatörü</span>
           <h1 class="section-title">Canlı Taksimetre & <span>Fiyat Hesaplama.</span></h1>
-          <p class="section-desc">Kırşehir içi ve şehirlerarası yolculuklarınızda başlangıç ve varış noktanızı seçin; tahmini mesafe, süre ve net tutarı anında görün.</p>
+          <p class="section-desc">Kırşehir içi ve şehirlerarası yolculuklarınızda başlangıç ve varış noktanızı seçin;
+            tahmini mesafe, süre ve net tutarı anında görün.</p>
         </div>
 
         <div style="max-width: 680px; margin: 0 auto 60px;">
@@ -132,7 +141,8 @@
             </div>
             <div class="calc-form">
               <div class="form-group">
-                <label class="form-label" for="calcPickup"><i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> Kalkış Yeri</label>
+                <label class="form-label" for="calcPickup"><i class="fa-solid fa-location-dot"
+                    style="color:var(--color-primary)"></i> Kalkış Yeri</label>
                 <select class="form-select" id="calcPickup">
                   <optgroup label="Şehir İçi Noktalar">
                     <option value="merkez" selected>Cacabey Meydanı & Şehir Merkezi</option>
@@ -165,13 +175,15 @@
 
               <!-- Route Swap Button -->
               <div class="calc-swap-row">
-                <button type="button" class="btn-swap-locations" id="btnSwapLocations" title="Kalkış ve Varış Noktalarını Değiştir" aria-label="Noktaları Değiştir">
+                <button type="button" class="btn-swap-locations" id="btnSwapLocations"
+                  title="Kalkış ve Varış Noktalarını Değiştir" aria-label="Noktaları Değiştir">
                   <i class="fa-solid fa-arrow-down-up-across-line"></i>
                 </button>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="calcDropoff"><i class="fa-solid fa-flag-checkered" style="color:var(--color-whatsapp)"></i> Varış Yeri</label>
+                <label class="form-label" for="calcDropoff"><i class="fa-solid fa-flag-checkered"
+                    style="color:var(--color-whatsapp)"></i> Varış Yeri</label>
                 <select class="form-select" id="calcDropoff">
                   <optgroup label="Şehir İçi Noktalar">
                     <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
@@ -226,17 +238,20 @@
           <div class="bento-card">
             <div class="bento-icon"><i class="fa-solid fa-flag"></i></div>
             <h3 class="bento-card-title">Taksimetre Açılış Ücreti</h3>
-            <p class="bento-card-desc">Tüm araçlarımızda taksimetre açılışı standart ve resmi tarife olan <b>35,00 ₺</b> üzerinden başlatılır.</p>
+            <p class="bento-card-desc">Tüm araçlarımızda taksimetre açılışı standart ve resmi tarife olan <b>35,00 ₺</b>
+              üzerinden başlatılır.</p>
           </div>
           <div class="bento-card">
             <div class="bento-icon"><i class="fa-solid fa-road"></i></div>
             <h3 class="bento-card-title">Kilometre Başı Ücret</h3>
-            <p class="bento-card-desc">Şehir içi her 1 kilometre için <b>25,00 ₺</b> yansıtılır. Trafik bekleme süreleri resmi taksimetre adımıyla hesaplanır.</p>
+            <p class="bento-card-desc">Şehir içi her 1 kilometre için <b>25,00 ₺</b> yansıtılır. Trafik bekleme süreleri
+              resmi taksimetre adımıyla hesaplanır.</p>
           </div>
           <div class="bento-card">
             <div class="bento-icon"><i class="fa-solid fa-arrow-down-short-wide"></i></div>
             <h3 class="bento-card-title">Minimum İndi-Bindi</h3>
-            <p class="bento-card-desc">Çok kısa mesafeli transferlerde araç minimum hizmet bedeli <b>100,00 ₺</b> olarak uygulanmaktadır.</p>
+            <p class="bento-card-desc">Çok kısa mesafeli transferlerde araç minimum hizmet bedeli <b>100,00 ₺</b> olarak
+              uygulanmaktadır.</p>
           </div>
         </div>
       </div>
@@ -248,11 +263,13 @@
     <div class="site-container">
       <div class="footer-bottom">
         <div>© 2026 <b>kirsehirtaksi.net</b> - Tüm Hakları Saklıdır.</div>
-        <div class="footer-designer">Tasarım: <a href="https://kirsehirwebdesign.com" target="_blank">Kırşehir Web Design / EyCodeX</a></div>
+        <div class="footer-designer">Tasarım: <a href="https://kirsehirwebdesign.com" target="_blank">Kırşehir Web
+            Design / EyCodeX</a></div>
       </div>
     </div>
   </footer>
 
   <script src="assets/js/main.js?v=3.2"></script>
 </body>
+
 </html>

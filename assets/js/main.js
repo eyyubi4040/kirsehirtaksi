@@ -393,7 +393,7 @@ function initFareCalculator() {
 }
 
 // Global helper for interactive quick route presets
-window.selectPreset = function(pickupVal, dropoffVal) {
+window.selectPreset = function (pickupVal, dropoffVal) {
   const pickup = document.getElementById("calcPickup");
   const dropoff = document.getElementById("calcDropoff");
   if (pickup && dropoff) {
@@ -401,7 +401,7 @@ window.selectPreset = function(pickupVal, dropoffVal) {
     dropoff.value = dropoffVal;
     pickup.dispatchEvent(new Event("change"));
     dropoff.dispatchEvent(new Event("change"));
-    
+
     // Highlight the price card subtly
     const card = document.querySelector(".fare-calc-card");
     if (card) {
@@ -441,8 +441,8 @@ function initReservationForm() {
       formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
     }
 
-    const message = 
-`🚖 *KIRŞEHİR TAKSİ - ONLİNE REZERVASYON TALEBİ*
+    const message =
+      `🚖 *KIRŞEHİR TAKSİ - ONLİNE REZERVASYON TALEBİ*
 
 👤 *Yolcu:* ${name}
 📞 *Telefon:* ${phone}
