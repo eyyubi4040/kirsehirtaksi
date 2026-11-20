@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://kirsehirtaksi.net/fiyat-hesapla">
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=3.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.2">
 
   <!-- Dual-mode Link Resolver (Guarantees zero ERR_FILE_NOT_FOUND on local double-click & preserves Clean URLs on server) -->
   <script>
@@ -134,16 +134,40 @@
               <div class="form-group">
                 <label class="form-label" for="calcPickup"><i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> Kalkış Yeri</label>
                 <select class="form-select" id="calcPickup">
-                  <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
-                  <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
-                  <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
-                  <option value="universite">Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
-                  <option value="kervansaray">Kervansaray Mahallesi</option>
-                  <option value="yenice">Yenice Mahallesi / Terme</option>
-                  <option value="asikpasa">Aşıkpaşa Mahallesi</option>
-                  <option value="kindam">Kındam Mahallesi</option>
-                  <option value="sanayi">Yeni Sanayi Sitesi</option>
+                  <optgroup label="Şehir İçi Noktalar">
+                    <option value="merkez" selected>Cacabey Meydanı & Şehir Merkezi</option>
+                    <option value="otogar">Kırşehir Şehirlerarası Otobüs Terminali</option>
+                    <option value="hastane">Kırşehir Eğitim ve Araştırma Hastanesi</option>
+                    <option value="universite">Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
+                    <option value="kervansaray">Kervansaray Mahallesi</option>
+                    <option value="yenice">Yenice Mahallesi / Terme</option>
+                    <option value="asikpasa">Aşıkpaşa Mahallesi</option>
+                    <option value="kindam">Kındam Mahallesi</option>
+                    <option value="sanayi">Yeni Sanayi Sitesi</option>
+                  </optgroup>
+                  <optgroup label="Kırşehir İlçeleri">
+                    <option value="mucur">Mucur (24 km)</option>
+                    <option value="kaman">Kaman (54 km)</option>
+                    <option value="boztepe">Boztepe (18 km)</option>
+                    <option value="akpinar">Akpınar (42 km)</option>
+                    <option value="cicekdagi">Çiçekdağı (68 km)</option>
+                    <option value="akcakent">Akçakent (72 km)</option>
+                  </optgroup>
+                  <optgroup label="Havalimanları & Çevre İller">
+                    <option value="esenboga">Ankara Esenboğa Havalimanı (ESB)</option>
+                    <option value="ankara-asti">Ankara Şehir Merkezi / AŞTİ</option>
+                    <option value="kayseri-havalimani">Kayseri Erkilet Havalimanı (ASR)</option>
+                    <option value="nevsehir-havalimani">Nevşehir Kapadokya Havalimanı (NAV)</option>
+                    <option value="kozakli">Kozaklı Termal Tesisleri</option>
+                  </optgroup>
                 </select>
+              </div>
+
+              <!-- Route Swap Button -->
+              <div class="calc-swap-row">
+                <button type="button" class="btn-swap-locations" id="btnSwapLocations" title="Kalkış ve Varış Noktalarını Değiştir" aria-label="Noktaları Değiştir">
+                  <i class="fa-solid fa-arrow-down-up-across-line"></i>
+                </button>
               </div>
 
               <div class="form-group">
@@ -155,7 +179,7 @@
                     <option value="universite" selected>Ahi Evran Üniversitesi (Bağbaşı Kampüsü)</option>
                     <option value="merkez">Cacabey Meydanı & Şehir Merkezi</option>
                     <option value="kervansaray">Kervansaray Mahallesi</option>
-                    <option value="yenice">Yenice Mahallesi</option>
+                    <option value="yenice">Yenice Mahallesi / Terme</option>
                     <option value="asikpasa">Aşıkpaşa Mahallesi</option>
                     <option value="kindam">Kındam Mahallesi</option>
                     <option value="sanayi">Yeni Sanayi Sitesi</option>
@@ -229,6 +253,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=3.2"></script>
 </body>
 </html>

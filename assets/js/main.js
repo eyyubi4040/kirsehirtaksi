@@ -68,35 +68,236 @@ const TAXI_CONFIG = {
   minFare: 100.00,
   phone: "05550000000",
   phoneFormatted: "0 555 000 00 00",
-  whatsappNumber: "905550000000",
-  
-  // Known routes & distances from Kırşehir Center
-  routes: {
-    "merkez-otogar": { km: 4, min: 7, fixedPrice: 135 },
-    "merkez-hastane": { km: 5, min: 8, fixedPrice: 160 },
-    "merkez-universite": { km: 9, min: 12, fixedPrice: 260 },
-    "merkez-kervansaray": { km: 3, min: 6, fixedPrice: 110 },
-    "merkez-yenice": { km: 3, min: 5, fixedPrice: 110 },
-    "merkez-asikpasa": { km: 4, min: 6, fixedPrice: 135 },
-    "merkez-kindam": { km: 7, min: 10, fixedPrice: 210 },
-    "merkez-sanayi": { km: 6, min: 8, fixedPrice: 185 },
-
-    // Districts
-    "merkez-mucur": { km: 24, min: 20, fixedPrice: 600 },
-    "merkez-kaman": { km: 54, min: 40, fixedPrice: 1150 },
-    "merkez-boztepe": { km: 18, min: 18, fixedPrice: 550 },
-    "merkez-akpinar": { km: 42, min: 35, fixedPrice: 950 },
-    "merkez-cicekdagi": { km: 68, min: 50, fixedPrice: 1450 },
-    "merkez-akcakent": { km: 72, min: 55, fixedPrice: 1550 },
-
-    // Airports & Intercity
-    "merkez-esenboga": { km: 215, min: 135, fixedPrice: 3200 },
-    "merkez-ankara-asti": { km: 185, min: 115, fixedPrice: 2700 },
-    "merkez-kayseri-havalimani": { km: 135, min: 90, fixedPrice: 2400 },
-    "merkez-nevsehir-havalimani": { km: 90, min: 65, fixedPrice: 1700 },
-    "merkez-kozakli": { km: 85, min: 60, fixedPrice: 1600 }
-  }
+  whatsappNumber: "905550000000"
 };
+
+// All locations with comprehensive geo-corridor metadata
+const LOCATIONS = {
+  // Şehir İçi Noktalar
+  "merkez": { name: "Cacabey Meydanı & Şehir Merkezi", category: "city", kmCenter: 0, minCenter: 0, corridor: "center" },
+  "otogar": { name: "Kırşehir Şehirlerarası Otobüs Terminali", category: "city", kmCenter: 4, minCenter: 7, corridor: "northwest" },
+  "hastane": { name: "Kırşehir Eğitim ve Araştırma Hastanesi", category: "city", kmCenter: 5, minCenter: 8, corridor: "west" },
+  "universite": { name: "Ahi Evran Üniversitesi (Bağbaşı Kampüsü)", category: "city", kmCenter: 9, minCenter: 12, corridor: "southeast" },
+  "kervansaray": { name: "Kervansaray Mahallesi", category: "city", kmCenter: 3, minCenter: 6, corridor: "west" },
+  "yenice": { name: "Yenice Mahallesi / Terme", category: "city", kmCenter: 3.5, minCenter: 6, corridor: "south" },
+  "asikpasa": { name: "Aşıkpaşa Mahallesi", category: "city", kmCenter: 3.5, minCenter: 6, corridor: "east" },
+  "kindam": { name: "Kındam Mahallesi", category: "city", kmCenter: 6.5, minCenter: 10, corridor: "north" },
+  "sanayi": { name: "Yeni Sanayi Sitesi", category: "city", kmCenter: 5.5, minCenter: 8, corridor: "northwest" },
+
+  // Kırşehir İlçeleri
+  "mucur": { name: "Mucur", category: "district", kmCenter: 24, minCenter: 20, corridor: "southeast", fixedPrice: 600 },
+  "kaman": { name: "Kaman", category: "district", kmCenter: 54, minCenter: 40, corridor: "northwest", fixedPrice: 1150 },
+  "boztepe": { name: "Boztepe", category: "district", kmCenter: 18, minCenter: 18, corridor: "north", fixedPrice: 550 },
+  "akpinar": { name: "Akpınar", category: "district", kmCenter: 42, minCenter: 35, corridor: "northwest", fixedPrice: 950 },
+  "cicekdagi": { name: "Çiçekdağı", category: "district", kmCenter: 68, minCenter: 50, corridor: "northeast", fixedPrice: 1450 },
+  "akcakent": { name: "Akçakent", category: "district", kmCenter: 72, minCenter: 55, corridor: "north", fixedPrice: 1550 },
+
+  // Havalimanı & Şehirlerarası
+  "esenboga": { name: "Ankara Esenboğa Havalimanı (ESB)", category: "airport", kmCenter: 215, minCenter: 135, corridor: "northwest", fixedPrice: 3200 },
+  "ankara-asti": { name: "Ankara Şehir Merkezi / AŞTİ", category: "airport", kmCenter: 185, minCenter: 115, corridor: "northwest", fixedPrice: 2700 },
+  "kayseri-havalimani": { name: "Kayseri Erkilet Havalimanı (ASR)", category: "airport", kmCenter: 135, minCenter: 90, corridor: "southeast", fixedPrice: 2400 },
+  "nevsehir-havalimani": { name: "Nevşehir Kapadokya Havalimanı (NAV)", category: "airport", kmCenter: 90, minCenter: 65, corridor: "southeast", fixedPrice: 1700 },
+  "kozakli": { name: "Kozaklı Termal Tesisleri", category: "airport", kmCenter: 85, minCenter: 60, corridor: "east", fixedPrice: 1600 }
+};
+
+// Exact pre-calculated matrix for city street network
+const CITY_ROUTES = {
+  "merkez-otogar": { km: 4, min: 7, price: 135 },
+  "merkez-hastane": { km: 5, min: 8, price: 160 },
+  "merkez-universite": { km: 9, min: 12, price: 260 },
+  "merkez-kervansaray": { km: 3, min: 6, price: 110 },
+  "merkez-yenice": { km: 3.5, min: 6, price: 110 },
+  "merkez-asikpasa": { km: 3.5, min: 6, price: 110 },
+  "merkez-kindam": { km: 6.5, min: 10, price: 200 },
+  "merkez-sanayi": { km: 5.5, min: 8, price: 175 },
+
+  "otogar-sanayi": { km: 2.5, min: 5, price: 100 },
+  "otogar-hastane": { km: 4.5, min: 7, price: 150 },
+  "otogar-universite": { km: 12.5, min: 16, price: 350 },
+  "otogar-kervansaray": { km: 4, min: 6, price: 135 },
+  "otogar-yenice": { km: 6.5, min: 10, price: 200 },
+  "otogar-asikpasa": { km: 6, min: 9, price: 185 },
+  "otogar-kindam": { km: 5, min: 8, price: 160 },
+
+  "hastane-universite": { km: 11.5, min: 15, price: 325 },
+  "hastane-kervansaray": { km: 2, min: 4, price: 100 },
+  "hastane-sanayi": { km: 5, min: 8, price: 160 },
+  "hastane-yenice": { km: 5.5, min: 8, price: 175 },
+  "hastane-asikpasa": { km: 6, min: 9, price: 185 },
+  "hastane-kindam": { km: 8, min: 12, price: 235 },
+
+  "universite-kervansaray": { km: 10, min: 14, price: 285 },
+  "universite-yenice": { km: 7, min: 10, price: 210 },
+  "universite-asikpasa": { km: 6.5, min: 9, price: 200 },
+  "universite-kindam": { km: 12, min: 17, price: 335 },
+  "universite-sanayi": { km: 13, min: 18, price: 360 },
+
+  "kervansaray-yenice": { km: 4.5, min: 7, price: 150 },
+  "kervansaray-asikpasa": { km: 5, min: 8, price: 160 },
+  "kervansaray-kindam": { km: 7.5, min: 11, price: 225 },
+  "kervansaray-sanayi": { km: 4.5, min: 7, price: 150 },
+
+  "yenice-asikpasa": { km: 4, min: 7, price: 135 },
+  "yenice-kindam": { km: 8.5, min: 12, price: 250 },
+  "yenice-sanayi": { km: 8, min: 12, price: 235 },
+
+  "asikpasa-kindam": { km: 7, min: 10, price: 210 },
+  "asikpasa-sanayi": { km: 7.5, min: 11, price: 225 },
+
+  "kindam-sanayi": { km: 6, min: 9, price: 185 }
+};
+
+// Known intercity highway shortcuts between districts / airports
+const SPECIAL_ROUTES = {
+  "kaman-esenboga": { km: 161, min: 100, price: 2450 },
+  "kaman-ankara-asti": { km: 131, min: 85, price: 2000 },
+  "akpinar-esenboga": { km: 173, min: 105, price: 2600 },
+  "akpinar-ankara-asti": { km: 143, min: 90, price: 2150 },
+  "mucur-kayseri-havalimani": { km: 111, min: 70, price: 1950 },
+  "mucur-nevsehir-havalimani": { km: 66, min: 45, price: 1250 },
+  "mucur-kozakli": { km: 61, min: 45, price: 1200 },
+  "mucur-kaman": { km: 78, min: 55, price: 1650 },
+  "boztepe-mucur": { km: 42, min: 35, price: 950 },
+  "boztepe-kaman": { km: 72, min: 55, price: 1550 },
+  "cicekdagi-kaman": { km: 122, min: 85, price: 2400 },
+  "cicekdagi-esenboga": { km: 220, min: 140, price: 3400 }
+};
+
+function formatDuration(minutes) {
+  if (minutes >= 60) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return mins > 0 ? `${hours} sa ${mins} dk` : `${hours} saat`;
+  }
+  return `${minutes} dakika`;
+}
+
+// Universal Route & Fare Calculation Engine
+function calculateRoute(pickupKey, dropoffKey) {
+  if (!pickupKey || !dropoffKey) return null;
+
+  // 1. Same location
+  if (pickupKey === dropoffKey) {
+    return {
+      km: 2,
+      min: 4,
+      price: TAXI_CONFIG.minFare,
+      type: "same",
+      note: "Aynı bölge / mahalle içi indi-bindi tarifesi (Min: " + TAXI_CONFIG.minFare + " ₺)"
+    };
+  }
+
+  const pLoc = LOCATIONS[pickupKey] || { name: pickupKey, category: "city", kmCenter: 5, minCenter: 8, corridor: "center" };
+  const dLoc = LOCATIONS[dropoffKey] || { name: dropoffKey, category: "city", kmCenter: 5, minCenter: 8, corridor: "center" };
+
+  const directKey = `${pickupKey}-${dropoffKey}`;
+  const reverseKey = `${dropoffKey}-${pickupKey}`;
+
+  // 2. Direct city route lookup
+  const cityMatch = CITY_ROUTES[directKey] || CITY_ROUTES[reverseKey];
+  if (cityMatch) {
+    return {
+      km: cityMatch.km,
+      min: cityMatch.min,
+      price: cityMatch.price,
+      type: "city",
+      note: `Yaklaşık ${cityMatch.km} km • ${formatDuration(cityMatch.min)} varış süresi (Canlı Taksimetre)`
+    };
+  }
+
+  // 3. Special highway route lookup
+  const specialMatch = SPECIAL_ROUTES[directKey] || SPECIAL_ROUTES[reverseKey];
+  if (specialMatch) {
+    return {
+      km: specialMatch.km,
+      min: specialMatch.min,
+      price: specialMatch.price,
+      type: "intercity",
+      note: `Yaklaşık ${specialMatch.km} km • ${formatDuration(specialMatch.min)} (Sabit VIP Tarife)`
+    };
+  }
+
+  // 4. One end is Center, other is District or Airport with fixedPrice
+  if (pickupKey === "merkez" && dLoc.fixedPrice) {
+    return {
+      km: dLoc.kmCenter,
+      min: dLoc.minCenter,
+      price: dLoc.fixedPrice,
+      type: dLoc.category,
+      note: `Yaklaşık ${dLoc.kmCenter} km • ${formatDuration(dLoc.minCenter)} (${dLoc.category === 'airport' ? 'Havalimanı VIP' : 'İlçe Sabit'} Tarife)`
+    };
+  }
+  if (dropoffKey === "merkez" && pLoc.fixedPrice) {
+    return {
+      km: pLoc.kmCenter,
+      min: pLoc.minCenter,
+      price: pLoc.fixedPrice,
+      type: pLoc.category,
+      note: `Yaklaşık ${pLoc.kmCenter} km • ${formatDuration(pLoc.minCenter)} (${pLoc.category === 'airport' ? 'Havalimanı VIP' : 'İlçe Sabit'} Tarife)`
+    };
+  }
+
+  // 5. One City location <-> One District/Airport location
+  const isPCity = pLoc.category === "city";
+  const isDCity = dLoc.category === "city";
+
+  if ((isPCity && !isDCity) || (!isPCity && isDCity)) {
+    const city = isPCity ? pLoc : dLoc;
+    const dest = isPCity ? dLoc : pLoc;
+
+    let offset = 0;
+    if (city.corridor === dest.corridor) {
+      offset = -Math.min(city.kmCenter * 0.85, 5);
+    } else if (
+      (city.corridor === "southeast" && dest.corridor === "northwest") ||
+      (city.corridor === "northwest" && dest.corridor === "southeast")
+    ) {
+      offset = city.kmCenter * 0.9;
+    } else {
+      offset = city.kmCenter * 0.4;
+    }
+
+    const km = Math.max(8, Math.round(dest.kmCenter + offset));
+    const min = Math.max(12, Math.round(dest.minCenter + (offset * 1.3)));
+
+    let price = 0;
+    if (dest.fixedPrice) {
+      price = Math.round((dest.fixedPrice + (offset * 20)) / 50) * 50;
+    } else {
+      price = Math.max(TAXI_CONFIG.minFare, Math.round((TAXI_CONFIG.openingFare + km * 22) / 50) * 50);
+    }
+
+    return {
+      km,
+      min,
+      price,
+      type: dest.category,
+      note: `Yaklaşık ${km} km • ${formatDuration(min)} (${dest.category === 'airport' ? 'Havalimanı VIP' : 'İlçe Sabit'} Tarife)`
+    };
+  }
+
+  // 6. Both are Districts / Airports
+  let km = 0;
+  let min = 0;
+  if (pLoc.corridor === dLoc.corridor) {
+    km = Math.abs(pLoc.kmCenter - dLoc.kmCenter);
+    min = Math.round(Math.abs(pLoc.minCenter - dLoc.minCenter) * 0.9);
+  } else {
+    km = Math.round((pLoc.kmCenter + dLoc.kmCenter) * 0.95);
+    min = Math.round((pLoc.minCenter + dLoc.minCenter) * 0.85);
+  }
+  km = Math.max(15, km);
+  min = Math.max(15, min);
+  const price = Math.round((TAXI_CONFIG.openingFare + km * 21) / 50) * 50;
+
+  return {
+    km,
+    min,
+    price,
+    type: "intercity",
+    note: `Yaklaşık ${km} km • ${formatDuration(min)} (Şehirlerarası Özel Tarife)`
+  };
+}
 
 /* ==========================================================================
    1. MOBILE NAVIGATION DRAWER
@@ -135,6 +336,7 @@ function initFareCalculator() {
   const priceDisplay = document.getElementById('calcPriceDisplay');
   const infoDisplay = document.getElementById('calcInfoDisplay');
   const actionBtn = document.getElementById('btnCalcAction');
+  const swapBtn = document.getElementById('btnSwapLocations');
 
   if (!pickupSelect || !dropoffSelect || !priceDisplay) return;
 
@@ -148,41 +350,41 @@ function initFareCalculator() {
       return;
     }
 
-    if (pickup === dropoff) {
-      priceDisplay.textContent = TAXI_CONFIG.minFare.toString();
-      if (infoDisplay) infoDisplay.textContent = "Aynı bölge içi indi-bindi tarifesi (Min: " + TAXI_CONFIG.minFare + " ₺)";
+    const route = calculateRoute(pickup, dropoff);
+    if (!route) {
+      priceDisplay.textContent = "0";
+      if (infoDisplay) infoDisplay.textContent = "Mesafe hesaplanamadı";
       return;
     }
 
-    const directKey = `${pickup}-${dropoff}`;
-    const reverseKey = `${dropoff}-${pickup}`;
-    const route = TAXI_CONFIG.routes[directKey] || TAXI_CONFIG.routes[reverseKey];
-
-    let estimatedPrice = 0;
-    let km = 5;
-    let mins = 8;
-
-    if (route) {
-      estimatedPrice = route.fixedPrice;
-      km = route.km;
-      mins = route.min;
-    } else {
-      km = 8;
-      mins = 12;
-      estimatedPrice = Math.max(TAXI_CONFIG.minFare, Math.round(TAXI_CONFIG.openingFare + (km * TAXI_CONFIG.perKmRate)));
-    }
-
-    priceDisplay.textContent = estimatedPrice.toLocaleString('tr-TR');
+    priceDisplay.textContent = route.price.toLocaleString('tr-TR');
     if (infoDisplay) {
-      infoDisplay.textContent = `Yaklaşık ${km} km • ${mins} dakika varış süresi`;
+      infoDisplay.textContent = route.note;
     }
 
     if (actionBtn) {
-      const pickupText = pickupSelect.options[pickupSelect.selectedIndex].text;
-      const dropoffText = dropoffSelect.options[dropoffSelect.selectedIndex].text;
-      const msg = encodeURIComponent(`Merhaba Kırşehir Taksi, ${pickupText} noktasından ${dropoffText} noktasına taksi çağırmak istiyorum. (Tahmini Tutar: ${estimatedPrice} ₺). Müsait misiniz?`);
+      const pickupText = pickupSelect.options[pickupSelect.selectedIndex]?.text || pickup;
+      const dropoffText = dropoffSelect.options[dropoffSelect.selectedIndex]?.text || dropoff;
+      const msg = encodeURIComponent(`Merhaba Kırşehir Taksi, ${pickupText} noktasından ${dropoffText} noktasına taksi çağırmak istiyorum. (Mesafe: ${route.km} km, Tahmini Tutar: ${route.price.toLocaleString('tr-TR')} ₺). Müsait misiniz?`);
       actionBtn.href = `https://wa.me/${TAXI_CONFIG.whatsappNumber}?text=${msg}`;
     }
+  }
+
+  // Location Swap button support
+  if (swapBtn) {
+    swapBtn.addEventListener('click', () => {
+      const pVal = pickupSelect.value;
+      const dVal = dropoffSelect.value;
+      pickupSelect.value = dVal;
+      dropoffSelect.value = pVal;
+      calculate();
+
+      // Micro-animation feedback
+      swapBtn.style.transform = 'rotate(180deg) scale(1.15)';
+      setTimeout(() => {
+        swapBtn.style.transform = '';
+      }, 300);
+    });
   }
 
   pickupSelect.addEventListener('change', calculate);
